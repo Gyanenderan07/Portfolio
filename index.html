@@ -7,260 +7,254 @@
   <title>Gyanenderan T – Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     /* ============ RESET & VARIABLES ============ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --green: #38FF62;
-      --green-dark: #2AE052;
-      --black: #0e0e0e;
-      --dark: #1a1a1a;
-      --dark2: #232323;
-      --gray: #888;
-      --light-gray: #e5e5e5;
-      --white: #ffffff;
-      --font-display: 'Bebas Neue', sans-serif;
+      --nothing-red: #FF0000;
+      --nothing-white: #F5F5F7;
+      --nothing-black: #0B0B0C;
+      --nothing-dark: #161618;
+      --nothing-gray: #6E6E73;
+      --nothing-border: #2C2C2E;
+      --nothing-glass: rgba(22, 22, 24, 0.7);
       --font-mono: 'Space Mono', monospace;
       --font-body: 'Inter', sans-serif;
     }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--font-body); background: var(--black); color: var(--white); overflow-x: hidden; cursor: none; }
+    html { scroll-behavior: smooth; background: var(--nothing-black); }
+    body { font-family: var(--font-body); background: var(--nothing-black); color: var(--nothing-white); overflow-x: hidden; cursor: none; -webkit-font-smoothing: antialiased; }
 
-    /* Custom cursor */
-    .cursor { width: 12px; height: 12px; background: var(--green); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transition: transform 0.15s ease; mix-blend-mode: difference; }
-    .cursor-ring { width: 36px; height: 36px; border: 1.5px solid var(--green); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.12s ease; opacity: 0.6; }
+    /* Nothing OS Dot Matrix Cursor Customizer */
+    .cursor { width: 6px; height: 6px; background: var(--nothing-white); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; mix-blend-mode: difference; }
+    .cursor-ring { width: 40px; height: 40px; border: 1px dotted var(--nothing-white); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.08s ease-out; opacity: 0.4; }
 
-    /* MOBILE LAYOUT CUSTOM CURSOR CONTROL */
     @media (max-width: 900px) {
       .cursor, .cursor-ring { display: none !important; }
       body, a, button, .project-item, .btn-primary, .btn-outline, .btn-submit, .back-top { cursor: default !important; }
     }
 
     /* ============ SCROLLBAR ============ */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--black); }
-    ::-webkit-scrollbar-thumb { background: var(--green); }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--nothing-black); }
+    ::-webkit-scrollbar-thumb { background: var(--nothing-white); border-radius: 10px; }
 
-    /* ============ TYPOGRAPHY ============ */
-    .display { font-family: var(--font-display); line-height: 0.92; letter-spacing: 0.02em; }
+    /* ============ TYPOGRAPHY & EXTRA UTILITIES ============ */
     .mono { font-family: var(--font-mono); }
-    .label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
+    .label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-gray); }
+    
+    /* Nothing Dot Matrix Custom Engine Layout Headers */
+    .ndot-header {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      background: linear-gradient(90deg, #fff 70%, rgba(255,255,255,0.1) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px var(--nothing-black);
+    }
 
     /* ============ NAV ============ */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 48px;
+      padding: 24px 48px;
       border-bottom: 1px solid transparent;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    nav.scrolled { background: rgba(14,14,14,0.95); backdrop-filter: blur(12px); border-bottom-color: #222; }
+    nav.scrolled { background: var(--nothing-glass); backdrop-filter: blur(20px); border-bottom-color: var(--nothing-border); }
     
-    /* Brand Layout Container with proper status light clustering */
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .nav-logo { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.1em; line-height: 1.3; }
-    .nav-logo span { color: var(--green); }
+    .logo-container { display: flex; align-items: center; gap: 12px; }
+    .nav-logo { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--nothing-white); text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; line-height: 1.4; }
+    .nav-logo span { color: var(--nothing-gray); font-weight: 400; }
     
-    /* 🟢 NAV BLINKING GREEN LIGHT (LEFT SIDE CLUSTERED) */
     .nav-status-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--green);
-      border-radius: 50%;
-      display: inline-block;
-      animation: pulse-nav 2s infinite;
-      flex-shrink: 0;
-      order: -1; /* This pushes the dot to the left side of the text */
+      width: 6px; height: 6px; background: var(--nothing-red); border-radius: 50%; display: inline-block;
+      animation: pulse-nav 1.5s infinite ease-in-out; flex-shrink: 0; order: -1;
     }
     @keyframes pulse-nav {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(56,255,98,0.5); }
-      50% { box-shadow: 0 0 0 6px transparent; }
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.4; }
     }
 
-    .nav-links { display: flex; gap: 36px; list-style: none; }
-    .nav-links a { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--green); }
-    .nav-cta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; background: var(--green); color: var(--black); padding: 10px 20px; text-decoration: none; font-weight: 700; transition: background 0.2s; }
-    .nav-cta:hover { background: var(--green-dark); }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: all 0.3s; }
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links a { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nothing-gray); text-decoration: none; transition: color 0.2s ease; }
+    .nav-links a:hover { color: var(--nothing-white); }
+    .nav-cta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; background: var(--nothing-white); color: var(--nothing-black); padding: 10px 24px; text-decoration: none; font-weight: 700; border-radius: 20px; transition: all 0.2s ease; border: 1px solid transparent; }
+    .nav-cta:hover { background: transparent; color: var(--nothing-white); border-color: var(--nothing-border); }
+    .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; }
+    .hamburger span { display: block; width: 20px; height: 1px; background: var(--nothing-white); transition: all 0.3s; }
 
-    /* ============ HERO ============ */
+    /* ============ HERO & COSMIC GRID ============ */
     #hero {
       min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 0 48px 80px; position: relative; overflow: hidden;
+      padding: 0 48px 100px; position: relative; overflow: hidden;
     }
+    /* Sleek Dot-Matrix Pattern */
     .hero-grid {
       position: absolute; inset: 0;
-      background-image: linear-gradient(rgba(56,255,98,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(56,255,98,0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
+      background-image: radial-gradient(var(--nothing-border) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.7;
     }
-    .hero-noise {
-      position: absolute; inset: 0; opacity: 0.03;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    /* Dynamic Cosmic Wave Canvas Layer */
+    .cosmic-canvas {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.45; z-index: 1;
     }
-    .hero-name { font-family: var(--font-display); font-size: clamp(80px, 14vw, 200px); line-height: 0.88; color: var(--white); position: relative; z-index: 1; }
-    .hero-name .accent { color: var(--green); }
-    .hero-bottom { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 40px; flex-wrap: wrap; gap: 24px; }
-    .hero-title { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); max-width: 340px; line-height: 1.8; }
-    .hero-title strong { color: var(--white); display: block; font-size: 16px; margin-bottom: 8px; }
-    .hero-scroll { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); display: flex; align-items: center; gap: 12px; }
-    .scroll-line { width: 60px; height: 1px; background: var(--gray); display: inline-block; }
+    .hero-name { font-size: clamp(64px, 12vw, 150px); line-height: 0.9; color: var(--nothing-white); position: relative; z-index: 2; margin-bottom: 20px; }
+    .hero-name .accent { color: var(--nothing-gray); }
+    .hero-bottom { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 40px; flex-wrap: wrap; gap: 32px; position: relative; z-index: 2; }
+    .hero-title { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--nothing-gray); max-width: 380px; line-height: 1.8; }
+    .hero-title strong { color: var(--nothing-white); display: block; font-size: 15px; margin-bottom: 10px; font-weight: 500; }
+    .hero-scroll { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nothing-gray); display: flex; align-items: center; gap: 12px; }
+    .scroll-line { width: 40px; height: 1px; background: dotted var(--nothing-border); border-top: 1px dotted var(--nothing-gray); display: inline-block; }
     .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
-    .btn-primary { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; background: var(--green); color: var(--black); padding: 14px 28px; text-decoration: none; font-weight: 700; transition: all 0.2s; border: none; cursor: none; }
-    .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); }
-    .btn-outline { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; background: transparent; color: var(--white); padding: 14px 28px; text-decoration: none; border: 1px solid #333; transition: all 0.2s; cursor: none; }
-    .btn-outline:hover { border-color: var(--green); color: var(--green); }
+    
+    /* Nothing Rounded-Capsule Buttons */
+    .btn-primary { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; background: var(--nothing-white); color: var(--nothing-black); padding: 14px 32px; text-decoration: none; font-weight: 700; border-radius: 24px; transition: all 0.3s ease; border: 1px solid transparent; cursor: none; }
+    .btn-primary:hover { background: transparent; color: var(--nothing-white); border-color: var(--nothing-white); }
+    .btn-outline { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; background: transparent; color: var(--nothing-white); padding: 14px 32px; text-decoration: none; border-radius: 24px; border: 1px solid var(--nothing-border); transition: all 0.3s ease; cursor: none; }
+    .btn-outline:hover { border-color: var(--nothing-white); }
 
-    /* ============ SECTION BASE ============ */
-    section { padding: 120px 48px; }
+    /* ============ SECTION CONFIGURATIONS ============ */
+    section { padding: 140px 48px; border-bottom: 1px dashed var(--nothing-border); position: relative; }
     .section-header { margin-bottom: 80px; }
-    .section-num { font-family: var(--font-mono); font-size: 11px; color: var(--green); letter-spacing: 0.2em; margin-bottom: 16px; display: block; }
-    .section-title { font-family: var(--font-display); font-size: clamp(48px, 7vw, 100px); line-height: 0.92; color: var(--white); }
-    .divider { width: 60px; height: 3px; background: var(--green); margin-top: 24px; }
+    .section-num { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-red); letter-spacing: 0.2em; margin-bottom: 16px; display: block; }
+    .section-title { font-size: clamp(40px, 6vw, 80px); color: var(--nothing-white); }
+    .divider { width: 30px; height: 1px; background: var(--nothing-gray); margin-top: 24px; }
 
     /* ============ ABOUT ============ */
-    #about { background: var(--black); }
+    #about { background: var(--nothing-black); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-    .about-text p { font-size: 18px; line-height: 1.8; color: #aaa; margin-bottom: 24px; }
-    .about-text p strong { color: var(--white); }
+    .about-text p { font-size: 16px; line-height: 1.8; color: var(--nothing-gray); margin-bottom: 24px; font-weight: 300; }
+    .about-text p strong { color: var(--nothing-white); font-weight: 500; }
+    
+    /* Monotonal Nothing Grid Cards */
     .about-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .about-card { border: 1px solid #1f1f1f; padding: 28px; transition: border-color 0.2s; }
-    .about-card:hover { border-color: var(--green); }
-    .about-card-icon { font-size: 28px; margin-bottom: 12px; }
-    .about-card h4 { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); margin-bottom: 8px; }
-    .about-card p { font-size: 13px; color: var(--gray); line-height: 1.6; }
+    .about-card { background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 16px; padding: 32px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .about-card:hover { border-color: var(--nothing-gray); background: var(--nothing-black); }
+    .about-card-icon { font-size: 20px; color: var(--nothing-gray); margin-bottom: 16px; font-family: var(--font-mono); }
+    .about-card h4 { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nothing-white); margin-bottom: 12px; }
+    .about-card p { font-size: 13px; color: var(--nothing-gray); line-height: 1.6; }
 
     /* ============ SKILLS ============ */
-    #skills { background: var(--dark); }
-    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: #1a1a1a; }
-    .skill-cat { background: var(--dark); padding: 40px 36px; }
-    .skill-cat-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 20px; display: block; }
-    .skill-cat h3 { font-family: var(--font-display); font-size: 32px; color: var(--white); margin-bottom: 24px; }
+    #skills { background: var(--nothing-black); }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .skill-cat { background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 20px; padding: 40px 36px; transition: all 0.3s ease; }
+    .skill-cat:hover { border-color: var(--nothing-white); }
+    .skill-cat-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-gray); margin-bottom: 20px; display: block; }
+    .skill-cat h3 { font-family: var(--font-mono); font-size: 20px; font-weight: 400; color: var(--nothing-white); margin-bottom: 24px; letter-spacing: -0.02em; }
     .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .skill-tag { font-family: var(--font-mono); font-size: 11px; padding: 6px 14px; border: 1px solid #2a2a2a; color: #aaa; letter-spacing: 0.05em; transition: all 0.2s; }
-    .skill-tag:hover { border-color: var(--green); color: var(--green); }
+    .skill-tag { font-family: var(--font-mono); font-size: 11px; padding: 6px 14px; border-radius: 14px; background: var(--nothing-black); border: 1px solid var(--nothing-border); color: var(--nothing-gray); letter-spacing: 0.05em; transition: all 0.2s; }
+    .skill-tag:hover { border-color: var(--nothing-white); color: var(--nothing-white); }
 
     /* ============ PROJECTS ============ */
-    #projects { background: var(--black); }
-    .projects-list { display: flex; flex-direction: column; gap: 2px; }
-    .project-item { display: grid; grid-template-columns: 80px 1fr auto; align-items: center; gap: 40px; padding: 40px 0; border-top: 1px solid #1a1a1a; transition: all 0.2s; cursor: none; text-decoration: none; }
-    .project-item:last-child { border-bottom: 1px solid #1a1a1a; }
-    .project-item:hover .project-num { color: var(--green); }
-    .project-item:hover .project-arrow { color: var(--green); transform: translate(4px, -4px); }
-    .project-num { font-family: var(--font-display); font-size: 48px; color: #222; transition: color 0.2s; line-height: 1; }
-    .project-content { }
-    .project-cat { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
-    .project-title { font-family: var(--font-display); font-size: clamp(28px, 3.5vw, 48px); color: var(--white); margin-bottom: 12px; line-height: 1; }
-    .project-desc { font-size: 14px; color: var(--gray); max-width: 560px; line-height: 1.7; margin-bottom: 16px; }
-    .projects-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .project-tag { font-family: var(--font-mono); font-size: 10px; padding: 4px 10px; border: 1px solid #2a2a2a; color: #666; }
-    .project-arrow { font-size: 32px; color: #333; transition: all 0.2s; }
+    #projects { background: var(--nothing-black); }
+    .projects-list { display: flex; flex-direction: column; gap: 0; }
+    .project-item { display: grid; grid-template-columns: 80px 1fr auto; align-items: center; gap: 40px; padding: 44px 16px; border-top: 1px dashed var(--nothing-border); transition: all 0.3s ease; cursor: none; text-decoration: none; border-radius: 12px; }
+    .project-item:last-child { border-bottom: 1px dashed var(--nothing-border); }
+    .project-item:hover { background: var(--nothing-dark); }
+    .project-item:hover .project-num { color: var(--nothing-white); }
+    .project-item:hover .project-arrow { color: var(--nothing-white); transform: translate(3px, -3px); }
+    .project-num { font-family: var(--font-mono); font-size: 24px; color: var(--nothing-border); transition: color 0.2s; }
+    .project-cat { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-gray); margin-bottom: 12px; }
+    .project-title { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--nothing-white); margin-bottom: 12px; letter-spacing: -0.02em; }
+    .project-desc { font-size: 14px; color: var(--nothing-gray); max-width: 640px; line-height: 1.7; margin-bottom: 20px; font-weight: 300; }
+    .projects-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .project-tag { font-family: var(--font-mono); font-size: 10px; padding: 4px 12px; border-radius: 10px; background: var(--nothing-black); border: 1px solid var(--nothing-border); color: var(--nothing-gray); }
+    .project-arrow { font-family: var(--font-mono); font-size: 24px; color: var(--nothing-gray); transition: all 0.3s ease; }
 
     /* ============ EDUCATION ============ */
-    #education { background: var(--dark); }
+    #education { background: var(--nothing-black); }
     .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
-    .edu-card { border: 1px solid #1f1f1f; padding: 48px; position: relative; overflow: hidden; }
-    .edu-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--green); }
-    .edu-card-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 20px; display: block; }
-    .edu-card h3 { font-family: var(--font-display); font-size: 28px; color: var(--white); margin-bottom: 8px; line-height: 1.1; }
-    .edu-card .institution { font-size: 14px; color: var(--gray); margin-bottom: 16px; }
-    .edu-card .year { font-family: var(--font-mono); font-size: 12px; color: var(--green); }
-    .cert-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
-    .cert-item { border: 1px solid #1f1f1f; padding: 20px 24px; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; transition: border-color 0.2s; }
-    .cert-item:hover { border-color: #333; }
-    .cert-name { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; color: var(--white); margin-bottom: 4px; }
-    .cert-courses { font-size: 12px; color: var(--gray); }
-    .cert-year { font-family: var(--font-mono); font-size: 11px; color: var(--green); white-space: nowrap; }
+    .edu-card { background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 24px; padding: 48px; position: relative; overflow: hidden; }
+    .edu-card::before { content: ''; position: absolute; top: 24px; right: 24px; width: 6px; height: 6px; background: var(--nothing-red); border-radius: 50%; }
+    .edu-card-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-gray); margin-bottom: 24px; display: block; }
+    .edu-card h3 { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--nothing-white); margin-bottom: 12px; }
+    .edu-card .institution { font-size: 14px; color: var(--nothing-gray); margin-bottom: 20px; }
+    .edu-card .year { font-family: var(--font-mono); font-size: 12px; color: var(--nothing-white); }
+    .cert-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .cert-item { background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 16px; padding: 24px; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; transition: all 0.2s; }
+    .cert-item:hover { border-color: var(--nothing-gray); }
+    .cert-name { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--nothing-white); margin-bottom: 6px; }
+    .cert-courses { font-size: 13px; color: var(--nothing-gray); }
+    .cert-year { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-gray); white-space: nowrap; }
 
     /* ============ CONTACT ============ */
-    #contact { background: var(--black); }
+    #contact { background: var(--nothing-black); }
     .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-    .contact-info p { font-size: 18px; color: #aaa; line-height: 1.8; margin-bottom: 48px; }
-    .contact-details { display: flex; flex-direction: column; gap: 20px; }
-    .contact-row { display: flex; align-items: center; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid #1a1a1a; }
+    .contact-info p { font-size: 16px; color: var(--nothing-gray); line-height: 1.8; margin-bottom: 48px; }
+    .contact-details { display: flex; flex-direction: column; gap: 4px; }
+    .contact-row { display: flex; align-items: center; gap: 16px; padding: 24px 0; border-bottom: 1px dashed var(--nothing-border); }
     .contact-row:last-child { border-bottom: none; }
-    .contact-row-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); width: 80px; flex-shrink: 0; }
-    .contact-row-value { font-size: 14px; color: var(--white); }
+    .contact-row-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nothing-gray); width: 100px; flex-shrink: 0; }
+    .contact-row-value { font-size: 14px; color: var(--nothing-white); font-family: var(--font-mono); }
     .contact-row-value a { color: inherit; text-decoration: none; transition: color 0.2s; }
-    .contact-row-value a:hover { color: var(--green); }
-    .contact-form { display: flex; flex-direction: column; gap: 0; }
-    .form-row { position: relative; border: 1px solid #1f1f1f; margin-bottom: -1px; }
+    .contact-row-value a:hover { color: var(--nothing-gray); }
+    
+    /* Form Customizations matching Nothing Phone settings layout */
+    .contact-form { display: flex; flex-direction: column; gap: 12px; }
+    .form-row { position: relative; background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 14px; transition: border-color 0.2s ease; }
     .form-row input, .form-row textarea {
       width: 100%; background: transparent; border: none; outline: none;
-      font-family: var(--font-body); font-size: 14px; color: var(--white);
-      padding: 20px 24px; resize: none;
+      font-family: var(--font-body); font-size: 14px; color: var(--nothing-white);
+      padding: 24px; resize: none;
     }
     .form-row textarea { height: 140px; }
-    .form-row label { position: absolute; top: 20px; left: 24px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); pointer-events: none; transition: all 0.2s; }
+    .form-row label { position: absolute; top: 24px; left: 24px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nothing-gray); pointer-events: none; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
     .form-row input:focus ~ label, .form-row input:not(:placeholder-shown) ~ label,
     .form-row textarea:focus ~ label, .form-row textarea:not(:placeholder-shown) ~ label {
-      top: 8px; font-size: 9px; color: var(--green);
+      top: 8px; font-size: 9px; color: var(--nothing-gray);
     }
-    .form-row:focus-within { border-color: var(--green); z-index: 1; }
-    .form-submit { margin-top: 16px; }
-    .btn-submit { width: 100%; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; background: var(--green); color: var(--black); padding: 18px; border: none; font-weight: 700; cursor: none; transition: all 0.2s; }
-    .btn-submit:hover { background: var(--green-dark); }
+    .form-row:focus-within { border-color: var(--nothing-white); }
+    .form-submit { margin-top: 12px; }
+    .btn-submit { width: 100%; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; background: var(--nothing-white); color: var(--nothing-black); padding: 18px; border-radius: 28px; border: none; font-weight: 700; cursor: none; transition: all 0.2s; }
+    .btn-submit:hover { opacity: 0.9; }
 
     /* ============ FOOTER ============ */
     footer {
-      background: var(--dark); padding: 40px 48px;
+      background: var(--nothing-black); padding: 60px 48px;
       display: flex; align-items: center; justify-content: space-between;
-      border-top: 1px solid #1a1a1a; flex-wrap: wrap; gap: 16px;
+      border-top: 1px dashed var(--nothing-border); flex-wrap: wrap; gap: 24px;
     }
-    .footer-copy { font-family: var(--font-mono); font-size: 11px; color: var(--gray); }
-    .footer-links { display: flex; gap: 24px; }
-    .footer-links a { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--green); }
-    .back-top { width: 44px; height: 44px; background: var(--green); display: flex; align-items: center; justify-content: center; cursor: none; transition: background 0.2s; border: none; }
-    .back-top:hover { background: var(--green-dark); }
-    .back-top svg { width: 16px; height: 16px; fill: var(--black); }
+    .footer-copy { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-gray); }
+    .footer-links { display: flex; gap: 32px; }
+    .footer-links a { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nothing-gray); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--nothing-white); }
+    .back-top { width: 44px; height: 44px; background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: none; transition: all 0.2s; }
+    .back-top:hover { border-color: var(--nothing-white); }
+    .back-top svg { width: 14px; height: 14px; fill: var(--nothing-white); }
 
     /* ============ ANIMATIONS ============ */
-    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
     /* ============ MOBILE MENU LAYER ============ */
-    .mobile-menu { display: none; position: fixed; inset: 0; background: var(--black); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+    .mobile-menu { display: none; position: fixed; inset: 0; background: var(--nothing-black); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
     .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-family: var(--font-display); font-size: 48px; color: var(--white); text-decoration: none; transition: color 0.2s; }
-    .mobile-menu a:hover { color: var(--green); }
+    .mobile-menu a { font-family: var(--font-mono); font-size: 32px; color: var(--nothing-gray); text-decoration: none; transition: color 0.2s; text-transform: uppercase; letter-spacing: -0.02em; }
+    .mobile-menu a:hover { color: var(--nothing-white); }
 
     /* ============ RESPONSIVE MEDIA HOOKS ============ */
     @media (max-width: 900px) {
-      nav { padding: 16px 24px; }
+      nav { padding: 24px; }
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
       #hero, section { padding-left: 24px; padding-right: 24px; }
       
-      /* 🟢 FIX 3: MOBILE SCREEN GAP & EXTRA HEIGHT SPACE ADJUSTMENT ABOVE HERO TEXT */
-      #hero {
-        min-height: 100vh;
-        justify-content: center; /* Pushes content upwards closer to the navbar */
-        padding-top: 100px;
-        padding-bottom: 40px;
-      }
-      .hero-bottom {
-        margin-top: 24px;
-      }
-
-      .about-grid, .edu-grid, .contact-layout { grid-template-columns: 1fr; gap: 48px; }
-      .skills-grid { grid-template-columns: 1fr; }
-      .project-item { grid-template-columns: 60px 1fr; }
+      #hero { justify-content: center; padding-top: 120px; padding-bottom: 60px; }
+      .hero-bottom { margin-top: 32px; }
+      .about-grid, .edu-grid, .contact-layout { grid-template-columns: 1fr; gap: 56px; }
+      .skills-grid { grid-template-columns: 1fr; gap: 16px; }
+      .project-item { grid-template-columns: 40px 1fr; gap: 20px; padding: 32px 0; }
       .project-arrow { display: none; }
-      footer { padding: 24px; }
+      footer { padding: 40px 24px; }
     }
     @media (max-width: 600px) {
       .about-cards { grid-template-columns: 1fr; }
-      .logo-container { gap: 6px; }
+      .logo-container { gap: 8px; }
       .nav-logo { font-size: 11px; }
-      .nav-status-dot { width: 6px; height: 6px; margin-top: 2px; }
     }
   </style>
 </head>
@@ -297,9 +291,9 @@
 
 <section id="hero">
   <div class="hero-grid"></div>
-  <div class="hero-noise"></div>
+  <canvas class="cosmic-canvas" id="cosmicCanvas"></canvas>
 
-  <h1 class="hero-name fade-up">
+  <h1 class="hero-name ndot-header fade-up">
     GYANENDERAN<span class="accent"><br>THIRUMAL</span>
   </h1>
 
@@ -322,7 +316,7 @@
 <section id="about">
   <div class="section-header fade-up">
     <span class="section-num">01 — About</span>
-    <h2 class="section-title">Professional<br>Summary</h2>
+    <h2 class="section-title ndot-header">Professional<br>Summary</h2>
     <div class="divider"></div>
   </div>
   <div class="about-grid">
@@ -333,22 +327,22 @@
     </div>
     <div class="about-cards fade-up">
       <div class="about-card">
-        <div class="about-card-icon">⬡</div>
+        <div class="about-card-icon">01</div>
         <h4>Frontend Dev</h4>
         <p>Responsive web design with modern HTML5, CSS3, and JavaScript</p>
       </div>
       <div class="about-card">
-        <div class="about-card-icon">◈</div>
+        <div class="about-card-icon">02</div>
         <h4>Backend Logic</h4>
         <p>Building scalable backend systems with database connectivity</p>
       </div>
       <div class="about-card">
-        <div class="about-card-icon">⬔</div>
+        <div class="about-card-icon">03</div>
         <h4>Database</h4>
         <p>Strong understanding of Oracle, MySQL, and DBMS concepts</p>
       </div>
       <div class="about-card">
-        <div class="about-card-icon">◎</div>
+        <div class="about-card-icon">04</div>
         <h4>Problem Solving</h4>
         <p>Data structures, algorithms, and logical thinking</p>
       </div>
@@ -359,7 +353,7 @@
 <section id="skills">
   <div class="section-header fade-up">
     <span class="section-num">02 — Skills</span>
-    <h2 class="section-title">Technical<br>Expertise</h2>
+    <h2 class="section-title ndot-header">Technical<br>Expertise</h2>
     <div class="divider"></div>
   </div>
   <div class="skills-grid fade-up">
@@ -433,11 +427,10 @@
 <section id="projects">
   <div class="section-header fade-up">
     <span class="section-num">03 — Projects</span>
-    <h2 class="section-title">Featured<br>Work</h2>
+    <h2 class="section-title ndot-header">Featured<br>Work</h2>
     <div class="divider"></div>
   </div>
   <div class="projects-list fade-up">
-    <!-- Project 01: EdgeSync -->
     <a href="https://edge-sync-app-theta.vercel.app/" target="_blank" class="project-item">
       <div class="project-num">01</div>
       <div class="project-content">
@@ -451,10 +444,9 @@
           <span class="project-tag">JavaScript</span>
         </div>
       </div>
-      <div class="project-arrow">↗</div>
+      <div class="project-arrow">→</div>
     </a>
     
-    <!-- Project 02: AIDLEX -->
     <div class="project-item">
       <div class="project-num">02</div>
       <div class="project-content">
@@ -468,10 +460,9 @@
           <span class="project-tag">Database</span>
         </div>
       </div>
-      <div class="project-arrow">↗</div>
+      <div class="project-arrow">→</div>
     </div>
     
-    <!-- Project 03: Full Stack Web Application -->
     <div class="project-item">
       <div class="project-num">03</div>
       <div class="project-content">
@@ -486,10 +477,9 @@
           <span class="project-tag">Database</span>
         </div>
       </div>
-      <div class="project-arrow">↗</div>
+      <div class="project-arrow">→</div>
     </div>
     
-    <!-- Project 04: NEOASSIST -->
     <div class="project-item">
       <div class="project-num">04</div>
       <div class="project-content">
@@ -503,7 +493,7 @@
           <span class="project-tag">Database</span>
         </div>
       </div>
-      <div class="project-arrow">↗</div>
+      <div class="project-arrow">→</div>
     </div>
   </div>
 </section>
@@ -511,7 +501,7 @@
 <section id="education">
   <div class="section-header fade-up">
     <span class="section-num">04 — Education</span>
-    <h2 class="section-title">Academic<br>Background</h2>
+    <h2 class="section-title ndot-header">Academic<br>Background</h2>
     <div class="divider"></div>
   </div>
   <div class="edu-grid fade-up">
@@ -526,9 +516,9 @@
         <span class="edu-card-label">Languages</span>
         <h3>Communication</h3>
         <div style="margin-top:16px;display:flex;flex-direction:column;gap:12px">
-          <div><span style="font-family:var(--font-mono);font-size:12px;color:var(--white)">Tamil</span> <span style="font-size:12px;color:var(--gray);margin-left:8px">Bilingual / C2</span></div>
-          <div><span style="font-family:var(--font-mono);font-size:12px;color:var(--white)">English</span> <span style="font-size:12px;color:var(--gray);margin-left:8px">Intermediate / B1</span></div>
-          <div><span style="font-family:var(--font-mono);font-size:12px;color:var(--white)">Telugu</span> <span style="font-size:12px;color:var(--gray);margin-left:8px">Beginner / A1</span></div>
+          <div><span style="font-family:var(--font-mono);font-size:12px;color:var(--nothing-white)">Tamil</span> <span style="font-size:12px;color:var(--nothing-gray);margin-left:8px">Bilingual / C2</span></div>
+          <div><span style="font-family:var(--font-mono);font-size:12px;color:var(--nothing-white)">English</span> <span style="font-size:12px;color:var(--nothing-gray);margin-left:8px">Intermediate / B1</span></div>
+          <div><span style="font-family:var(--font-mono);font-size:12px;color:var(--nothing-white)">Telugu</span> <span style="font-size:12px;color:var(--nothing-gray);margin-left:8px">Beginner / A1</span></div>
         </div>
       </div>
     </div>
@@ -571,7 +561,7 @@
 <section id="contact">
   <div class="section-header fade-up">
     <span class="section-num">05 — Contact</span>
-    <h2 class="section-title">Let's Work<br>Together</h2>
+    <h2 class="section-title ndot-header">Let's Work<br>Together</h2>
     <div class="divider"></div>
   </div>
   <div class="contact-layout fade-up">
@@ -632,14 +622,65 @@
 </footer>
 
 <script>
-  // Cursor
+  // Cursor Engine
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
   let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx - 6 + 'px'; cursor.style.top = my - 6 + 'px'; });
-  function animRing() { rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15; ring.style.left = rx - 18 + 'px'; ring.style.top = ry - 18 + 'px'; requestAnimationFrame(animRing); }
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx - 3 + 'px'; cursor.style.top = my - 3 + 'px'; });
+  function animRing() { rx += (mx - rx) * 0.2; ry += (my - ry) * 0.2; ring.style.left = rx - 20 + 'px'; ring.style.top = ry - 20 + 'px'; requestAnimationFrame(animRing); }
   animRing();
-  document.querySelectorAll('a,button,.project-item').forEach(el => { el.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2)'; ring.style.transform = 'scale(1.5)'; ring.style.opacity = '0.3'; }); el.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; ring.style.transform = 'scale(1)'; ring.style.opacity = '0.6'; }); });
+  document.querySelectorAll('a,button,.project-item').forEach(el => { el.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2.5)'; ring.style.transform = 'scale(1.2)'; ring.style.borderColor = 'var(--nothing-red)'; }); el.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; ring.style.transform = 'scale(1)'; ring.style.borderColor = 'var(--nothing-white)'; }); });
+
+  // Cosmic Interactive Wave Engine (Canvas Based Optimization)
+  const canvas = document.getElementById('cosmicCanvas');
+  const ctx = canvas.getContext('2d');
+  let width = canvas.width = window.innerWidth;
+  let height = canvas.height = window.innerHeight;
+  
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  let points = [];
+  const totalPoints = 6;
+  for(let i = 0; i <= totalPoints; i++) {
+    points.push({
+      x: (width / totalPoints) * i,
+      y: height * 0.6,
+      targetY: height * 0.6,
+      angle: Math.random() * Math.PI * 2,
+      speed: 0.01 + Math.random() * 0.01
+    });
+  }
+
+  function drawCosmicWaves() {
+    ctx.clearRect(0, 0, width, height);
+    ctx.strokeStyle = 'rgba(110, 110, 115, 0.15)';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 4]); // Tech-Noir broken matrix wave lines
+    
+    ctx.beginPath();
+    for(let i = 0; i < points.length; i++) {
+      let p = points[i];
+      p.angle += p.speed;
+      // Synthesize elegant wave displacement
+      let waveOffset = Math.sin(p.angle) * 35;
+      let currentY = p.y + waveOffset;
+      
+      if(i === 0) ctx.moveTo(p.x, currentY);
+      else {
+        let prevP = points[i-1];
+        let prevWaveOffset = Math.sin(prevP.angle) * 35;
+        let xc = (prevP.x + p.x) / 2;
+        let yc = ((prevP.y + prevWaveOffset) + currentY) / 2;
+        ctx.quadraticCurveTo(prevP.x, prevP.y + prevWaveOffset, xc, yc);
+      }
+    }
+    ctx.stroke();
+    requestAnimationFrame(drawCosmicWaves);
+  }
+  drawCosmicWaves();
 
   // Nav scroll
   window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60); });
