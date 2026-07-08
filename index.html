@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Gyanenderan T – Full Stack Developer Portfolio" />
   <title>Gyanenderan T – Portfolio</title>
-  <!-- Nothing OS Core Font Systems -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -40,29 +39,28 @@
     ::-webkit-scrollbar-track { background: var(--nothing-black); }
     ::-webkit-scrollbar-thumb { background: var(--nothing-red); border-radius: 10px; }
 
-    /* ============ 🔴 NEW: TRUE DOT-MATRIX FONT SYSTEM ENGINE ============ */
-    /* Generates authentic hardware circular dots matching the screenshot */
+    /* ============ 🔴 NEW: ADVANCED NOTHING TRUE DOT FONT ENGINE ============ */
+    /* Generates exact hardware circular dots alignment matching the screenshot precisely */
     .ndot-header {
       font-family: var(--font-mono);
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: -0.02em;
+      letter-spacing: 0.04em;
       color: var(--nothing-white);
       display: inline-block;
-      background-image: radial-gradient(var(--nothing-white) 32%, transparent 38%), 
-                        radial-gradient(rgba(255,255,255,0.2) 15%, transparent 20%);
-      background-size: 7px 7px;
-      background-position: 0 0;
+      position: relative;
+      background: radial-gradient(circle, var(--nothing-white) 35%, transparent 40%);
+      background-size: 8px 8px;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      line-height: 1.0;
+      padding-right: 4px;
     }
     
-    /* Dynamic variant header for Red Typography */
     .ndot-header-red {
-      background-image: radial-gradient(var(--nothing-red) 35%, transparent 40%),
-                        radial-gradient(rgba(255,0,0,0.2) 15%, transparent 20%);
-      text-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+      background: radial-gradient(circle, var(--nothing-red) 35%, transparent 40%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 4px rgba(255, 0, 0, 0.6));
     }
 
     .mono { font-family: var(--font-mono); }
@@ -113,7 +111,7 @@
     .cosmic-canvas {
       position: absolute; inset: 0; pointer-events: none; opacity: 0.75; z-index: 1;
     }
-    .hero-name { font-size: clamp(48px, 9vw, 110px); color: var(--nothing-white); position: relative; z-index: 2; margin-bottom: 20px; font-weight: 700; }
+    .hero-name { font-size: clamp(40px, 7.5vw, 95px); color: var(--nothing-white); position: relative; z-index: 2; margin-bottom: 20px; font-weight: 700; line-height: 1.1; word-wrap: break-word; }
     .hero-bottom { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 40px; flex-wrap: wrap; gap: 32px; position: relative; z-index: 2; }
     .hero-title { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--nothing-gray); max-width: 380px; line-height: 1.8; }
     .hero-title strong { color: var(--nothing-white); display: block; font-size: 15px; margin-bottom: 10px; font-weight: 500; }
@@ -308,10 +306,8 @@
 
 <section id="hero">
   <div class="hero-grid"></div>
-  <!-- Interactive Vibrantly Glowing Red Cosmic Canvas Layer -->
   <canvas class="cosmic-canvas" id="cosmicCanvas"></canvas>
 
-  <!-- 🔴 AUTENTIC COMPONENT: MATCHING NOTHING DOT MATRIX HARDWARE STYLE -->
   <h1 class="hero-name fade-up">
     <span class="ndot-header">GYANENDERAN</span><br>
     <span class="ndot-header ndot-header-red">THIRUMAL</span>
@@ -333,7 +329,6 @@
   </div>
 </section>
 
-<!-- TICKER MARQUEE COMPONENT EXACTLY POSITIONED ABOVE PROFESSIONAL SUMMARY -->
 <div class="nothing-ticker-container">
   <div class="nothing-ticker-wrap">
     <div class="ticker-item">Gyanenderan Portfolio OS <span>//</span> Version 2.0</div>
@@ -350,7 +345,7 @@
 <section id="about">
   <div class="section-header fade-up">
     <span class="section-num">01 — About</span>
-    <h2 class="section-title ndot-header">Professional<br>Summary</h2>
+    <h2 class="section-title"><span class="ndot-header">Professional</span><br><span class="ndot-header">Summary</span></h2>
     <div class="divider"></div>
   </div>
   <div class="about-grid">
@@ -387,7 +382,7 @@
 <section id="skills">
   <div class="section-header fade-up">
     <span class="section-num">02 — Skills</span>
-    <h2 class="section-title ndot-header">Technical<br>Expertise</h2>
+    <h2 class="section-title"><span class="ndot-header">Technical</span><br><span class="ndot-header">Expertise</span></h2>
     <div class="divider"></div>
   </div>
   <div class="skills-grid fade-up">
@@ -461,11 +456,10 @@
 <section id="projects">
   <div class="section-header fade-up">
     <span class="section-num">03 — Projects</span>
-    <h2 class="section-title ndot-header">Featured<br>Work</h2>
+    <h2 class="section-title"><span class="ndot-header">Featured</span><br><span class="ndot-header">Work</span></h2>
     <div class="divider"></div>
   </div>
   <div class="projects-list fade-up">
-    <!-- Project 01: EdgeSync -->
     <a href="https://edge-sync-app-theta.vercel.app/" target="_blank" class="project-item">
       <div class="project-num">01</div>
       <div class="project-content">
@@ -482,7 +476,6 @@
       <div class="project-arrow">↗</div>
     </a>
     
-    <!-- Project 02: AIDLEX -->
     <div class="project-item">
       <div class="project-num">02</div>
       <div class="project-content">
@@ -499,7 +492,6 @@
       <div class="project-arrow">↗</div>
     </div>
     
-    <!-- Project 03: Full Stack Web Application -->
     <div class="project-item">
       <div class="project-num">03</div>
       <div class="project-content">
@@ -517,7 +509,6 @@
       <div class="project-arrow">→</div>
     </div>
     
-    <!-- Project 04: NEOASSIST -->
     <div class="project-item">
       <div class="project-num">04</div>
       <div class="project-content">
@@ -539,7 +530,7 @@
 <section id="education">
   <div class="section-header fade-up">
     <span class="section-num">04 — Education</span>
-    <h2 class="section-title ndot-header">Academic<br>Background</h2>
+    <h2 class="section-title"><span class="ndot-header">Academic</span><br><span class="ndot-header">Background</span></h2>
     <div class="divider"></div>
   </div>
   <div class="edu-grid fade-up">
@@ -599,7 +590,7 @@
 <section id="contact">
   <div class="section-header fade-up">
     <span class="section-num">05 — Contact</span>
-    <h2 class="section-title ndot-header">Let's Work<br>Together</h2>
+    <h2 class="section-title"><span class="ndot-header">Let's</span> <span class="ndot-header ndot-header-red">Work</span><br><span class="ndot-header">Together</span></h2>
     <div class="divider"></div>
   </div>
   <div class="contact-layout fade-up">
@@ -684,7 +675,7 @@
     }); 
   });
 
-  // Red Cosmic Fluid Wave Engine (Fine-tuned Canvas Speed & Amplitude)
+  // Red Cosmic Fluid Wave Engine
   const canvas = document.getElementById('cosmicCanvas');
   const ctx = canvas.getContext('2d');
   let width = canvas.width = window.innerWidth;
@@ -708,7 +699,7 @@
 
   function drawCosmicWaves() {
     ctx.clearRect(0, 0, width, height);
-    ctx.strokeStyle = 'rgba(255, 0, 0, 0.32)'; // Rich Vibrant Red Wave Traces
+    ctx.strokeStyle = 'rgba(255, 0, 0, 0.32)';
     ctx.lineWidth = 1.4;
     ctx.setLineDash([5, 4]);
     
