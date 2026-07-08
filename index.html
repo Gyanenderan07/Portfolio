@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Gyanenderan T – Full Stack Developer Portfolio" />
   <title>Gyanenderan T – Portfolio</title>
+  <!-- Nothing OS Typography Setup -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -25,9 +26,9 @@
     html { scroll-behavior: smooth; background: var(--nothing-black); }
     body { font-family: var(--font-body); background: var(--nothing-black); color: var(--nothing-white); overflow-x: hidden; cursor: none; -webkit-font-smoothing: antialiased; }
 
-    /* Nothing OS Dot Matrix Cursor Customizer */
-    .cursor { width: 6px; height: 6px; background: var(--nothing-white); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; mix-blend-mode: difference; }
-    .cursor-ring { width: 40px; height: 40px; border: 1px dotted var(--nothing-white); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.08s ease-out; opacity: 0.4; }
+    /* Nothing OS Dot Matrix Cursor Customizer - 🔴 Added Red Matrix Pulse */
+    .cursor { width: 6px; height: 6px; background: var(--nothing-red); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; }
+    .cursor-ring { width: 40px; height: 40px; border: 1px dotted var(--nothing-red); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.08s ease-out; opacity: 0.5; }
 
     @media (max-width: 900px) {
       .cursor, .cursor-ring { display: none !important; }
@@ -37,7 +38,7 @@
     /* ============ SCROLLBAR ============ */
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: var(--nothing-black); }
-    ::-webkit-scrollbar-thumb { background: var(--nothing-white); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: var(--nothing-red); border-radius: 10px; }
 
     /* ============ TYPOGRAPHY & EXTRA UTILITIES ============ */
     .mono { font-family: var(--font-mono); }
@@ -65,20 +66,21 @@
     .nav-logo { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--nothing-white); text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; line-height: 1.4; }
     .nav-logo span { color: var(--nothing-gray); font-weight: 400; }
     
+    /* 🔴 Nav Status Light Glow */
     .nav-status-dot {
       width: 6px; height: 6px; background: var(--nothing-red); border-radius: 50%; display: inline-block;
-      animation: pulse-nav 1.5s infinite ease-in-out; flex-shrink: 0; order: -1;
+      animation: pulse-nav 1.2s infinite ease-in-out; flex-shrink: 0; order: -1;
     }
     @keyframes pulse-nav {
-      0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
-      50% { transform: scale(1.3); opacity: 0.4; box-shadow: 0 0 8px 2px rgba(255, 0, 0, 0); }
+      0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 10px 2px rgba(255, 0, 0, 0.8); }
+      50% { transform: scale(1.4); opacity: 0.4; box-shadow: 0 0 4px 1px rgba(255, 0, 0, 0.2); }
     }
 
     .nav-links { display: flex; gap: 40px; list-style: none; }
     .nav-links a { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nothing-gray); text-decoration: none; transition: color 0.2s ease; }
-    .nav-links a:hover { color: var(--nothing-white); }
+    .nav-links a:hover { color: var(--nothing-red); }
     .nav-cta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; background: var(--nothing-white); color: var(--nothing-black); padding: 10px 24px; text-decoration: none; font-weight: 700; border-radius: 20px; transition: all 0.2s ease; border: 1px solid transparent; }
-    .nav-cta:hover { background: transparent; color: var(--nothing-white); border-color: var(--nothing-border); box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); }
+    .nav-cta:hover { background: var(--nothing-red); color: var(--nothing-white); border-color: var(--nothing-red); box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); }
     .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; }
     .hamburger span { display: block; width: 20px; height: 1px; background: var(--nothing-white); transition: all 0.3s; }
 
@@ -94,42 +96,43 @@
       opacity: 0.7;
     }
     .cosmic-canvas {
-      position: absolute; inset: 0; pointer-events: none; opacity: 0.55; z-index: 1;
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.65; z-index: 1;
     }
     .hero-name { font-size: clamp(54px, 10vw, 120px); line-height: 0.95; color: var(--nothing-white); position: relative; z-index: 2; margin-bottom: 20px; }
-    .hero-name .accent { color: var(--nothing-gray); }
+    .hero-name .accent { color: var(--nothing-red); } /* 🔴 Changed Accent to Red */
     .hero-bottom { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 40px; flex-wrap: wrap; gap: 32px; position: relative; z-index: 2; }
     .hero-title { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--nothing-gray); max-width: 380px; line-height: 1.8; }
     .hero-title strong { color: var(--nothing-white); display: block; font-size: 15px; margin-bottom: 10px; font-weight: 500; }
     .hero-scroll { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nothing-gray); display: flex; align-items: center; gap: 12px; }
-    .scroll-line { width: 40px; height: 1px; border-top: 1px dotted var(--nothing-gray); display: inline-block; }
+    .scroll-line { width: 40px; height: 1px; border-top: 1px dotted var(--nothing-red); display: inline-block; } /* 🔴 Red Scroll Line */
     .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
     
     .btn-primary { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; background: var(--nothing-white); color: var(--nothing-black); padding: 14px 32px; text-decoration: none; font-weight: 700; border-radius: 24px; transition: all 0.3s ease; border: 1px solid transparent; cursor: none; }
-    .btn-primary:hover { background: transparent; color: var(--nothing-white); border-color: var(--nothing-white); box-shadow: 0 0 20px rgba(255, 255, 255, 0.15); }
+    .btn-primary:hover { background: var(--nothing-red); color: var(--nothing-white); border-color: var(--nothing-red); box-shadow: 0 0 20px rgba(255, 0, 0, 0.4); }
     .btn-outline { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; background: transparent; color: var(--nothing-white); padding: 14px 32px; text-decoration: none; border-radius: 24px; border: 1px solid var(--nothing-border); transition: all 0.3s ease; cursor: none; }
-    .btn-outline:hover { border-color: var(--nothing-white); background: rgba(255, 255, 255, 0.03); }
+    .btn-outline:hover { border-color: var(--nothing-red); color: var(--nothing-red); background: rgba(255, 0, 0, 0.02); }
 
     /* ============ SECTION CONFIGURATIONS ============ */
     section { padding: 140px 48px; border-bottom: 1px dashed var(--nothing-border); position: relative; }
     .section-header { margin-bottom: 80px; }
     .section-num { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-red); letter-spacing: 0.2em; margin-bottom: 16px; display: block; }
     .section-title { font-size: clamp(36px, 5vw, 64px); color: var(--nothing-white); }
-    .divider { width: 30px; height: 1px; background: var(--nothing-gray); margin-top: 24px; }
+    .divider { width: 30px; height: 1px; background: var(--nothing-red); margin-top: 24px; } /* 🔴 Red Dividers */
 
-    /* ============ 🔴 NEW: DYNAMIC HORIZONTAL TEXT TICKER (MARQUEE) ============ */
+    /* ============ 🔴 TEXT TICKER (MARQUEE) - MOVED ABOVE PROFESSIONAL SUMMARY ============ */
     .nothing-ticker-container {
       width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;
       background: var(--nothing-dark); border-top: 1px solid var(--nothing-border); border-bottom: 1px solid var(--nothing-border);
-      padding: 20px 0; overflow: hidden; display: flex; align-items: center;
+      padding: 22px 0; overflow: hidden; display: flex; align-items: center; z-index: 5;
     }
-    .nothing-ticker-wrap { display: flex; width: max-content; animation: marquee-scroll 25s linear infinite; }
-    .nothing-ticker-wrap:hover { animation-play-state: paused; } /* Interaction: Pause on hover */
+    .nothing-ticker-wrap { display: flex; width: max-content; animation: marquee-scroll 22s linear infinite; }
+    .nothing-ticker-wrap:hover { animation-play-state: paused; }
     .ticker-item {
-      font-family: var(--font-mono); font-size: 14px; font-weight: 700; text-transform: uppercase;
-      color: var(--nothing-white); letter-spacing: 0.1em; padding: 0 40px; display: flex; align-items: center; gap: 16px; white-space: nowrap;
+      font-family: var(--font-mono); font-size: 13px; font-weight: 700; text-transform: uppercase;
+      color: var(--nothing-white); letter-spacing: 0.12em; padding: 0 40px; display: flex; align-items: center; gap: 16px; white-space: nowrap;
     }
-    .ticker-item::after { content: '●'; color: var(--nothing-red); font-size: 10px; margin-left: 40px; }
+    .ticker-item span { color: var(--nothing-red); } /* Highlight matrix dots */
+    .ticker-item::after { content: '///'; color: var(--nothing-red); font-size: 12px; margin-left: 40px; letter-spacing: 2px; }
     @keyframes marquee-scroll {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
@@ -143,8 +146,8 @@
     
     .about-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .about-card { background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 16px; padding: 32px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); position: relative; overflow: hidden; }
-    .about-card:hover { border-color: var(--nothing-white); background: var(--nothing-black); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-    .about-card-icon { font-size: 20px; color: var(--nothing-gray); margin-bottom: 16px; font-family: var(--font-mono); }
+    .about-card:hover { border-color: var(--nothing-red); background: var(--nothing-black); transform: translateY(-4px); } /* 🔴 Red Hover Border */
+    .about-card-icon { font-size: 20px; color: var(--nothing-red); margin-bottom: 16px; font-family: var(--font-mono); font-weight: bold; } /* 🔴 Red Icons */
     .about-card h4 { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nothing-white); margin-bottom: 12px; }
     .about-card p { font-size: 13px; color: var(--nothing-gray); line-height: 1.6; }
 
@@ -152,21 +155,21 @@
     #skills { background: var(--nothing-black); }
     .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .skill-cat { background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 20px; padding: 40px 36px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-    .skill-cat:hover { border-color: var(--nothing-white); transform: translateY(-4px); }
-    .skill-cat-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-gray); margin-bottom: 20px; display: block; }
+    .skill-cat:hover { border-color: var(--nothing-red); transform: translateY(-4px); } /* 🔴 Red Hover Border */
+    .skill-cat-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-red); margin-bottom: 20px; display: block; } /* 🔴 Red labels */
     .skill-cat h3 { font-family: var(--font-mono); font-size: 20px; font-weight: 400; color: var(--nothing-white); margin-bottom: 24px; letter-spacing: -0.02em; }
     .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .skill-tag { font-family: var(--font-mono); font-size: 11px; padding: 6px 14px; border-radius: 14px; background: var(--nothing-black); border: 1px solid var(--nothing-border); color: var(--nothing-gray); letter-spacing: 0.05em; transition: all 0.2s; }
-    .skill-tag:hover { border-color: var(--nothing-white); color: var(--nothing-white); background: rgba(255,255,255,0.05); }
+    .skill-tag:hover { border-color: var(--nothing-red); color: var(--nothing-white); background: rgba(255, 0, 0, 0.04); }
 
     /* ============ PROJECTS ============ */
     #projects { background: var(--nothing-black); }
     .projects-list { display: flex; flex-direction: column; gap: 0; }
     .project-item { display: grid; grid-template-columns: 80px 1fr auto; align-items: center; gap: 40px; padding: 44px 16px; border-top: 1px dashed var(--nothing-border); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); cursor: none; text-decoration: none; border-radius: 12px; }
     .project-item:last-child { border-bottom: 1px dashed var(--nothing-border); }
-    .project-item:hover { background: var(--nothing-dark); padding-left: 24px; padding-right: 24px; }
-    .project-item:hover .project-num { color: var(--nothing-white); }
-    .project-item:hover .project-arrow { color: var(--nothing-white); transform: translate(6px, -6px); }
+    .project-item:hover { background: var(--nothing-dark); border-top-color: var(--nothing-red); border-bottom-color: var(--nothing-red); padding-left: 24px; padding-right: 24px; } /* 🔴 Red Border-flashes */
+    .project-item:hover .project-num { color: var(--nothing-red); } /* 🔴 Red Numbers on Hover */
+    .project-item:hover .project-arrow { color: var(--nothing-red); transform: translate(6px, -6px); }
     .project-num { font-family: var(--font-mono); font-size: 24px; color: var(--nothing-border); transition: color 0.2s; }
     .project-cat { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-gray); margin-bottom: 12px; }
     .project-title { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--nothing-white); margin-bottom: 12px; letter-spacing: -0.02em; }
@@ -179,18 +182,18 @@
     #education { background: var(--nothing-black); }
     .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
     .edu-card { background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 24px; padding: 48px; position: relative; overflow: hidden; transition: all 0.3s ease; }
-    .edu-card:hover { border-color: var(--nothing-white); }
-    .edu-card::before { content: ''; position: absolute; top: 24px; right: 24px; width: 6px; height: 6px; background: var(--nothing-red); border-radius: 50%; }
+    .edu-card:hover { border-color: var(--nothing-red); } /* 🔴 Red Hover Border */
+    .edu-card::before { content: ''; position: absolute; top: 24px; right: 24px; width: 6px; height: 6px; background: var(--nothing-red); border-radius: 50%; box-shadow: 0 0 8px 1px var(--nothing-red); }
     .edu-card-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-gray); margin-bottom: 24px; display: block; }
     .edu-card h3 { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--nothing-white); margin-bottom: 12px; }
     .edu-card .institution { font-size: 14px; color: var(--nothing-gray); margin-bottom: 20px; }
-    .edu-card .year { font-family: var(--font-mono); font-size: 12px; color: var(--nothing-white); }
+    .edu-card .year { font-family: var(--font-mono); font-size: 12px; color: var(--nothing-red); } /* 🔴 Red Timeline Text */
     .cert-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
     .cert-item { background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 16px; padding: 24px; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; transition: all 0.3s ease; }
-    .cert-item:hover { border-color: var(--nothing-white); transform: scale(1.01); }
+    .cert-item:hover { border-color: var(--nothing-red); transform: scale(1.01); }
     .cert-name { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--nothing-white); margin-bottom: 6px; }
     .cert-courses { font-size: 13px; color: var(--nothing-gray); }
-    .cert-year { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-gray); white-space: nowrap; }
+    .cert-year { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-red); white-space: nowrap; } /* 🔴 Red Year Label */
 
     /* ============ CONTACT ============ */
     #contact { background: var(--nothing-black); }
@@ -199,10 +202,10 @@
     .contact-details { display: flex; flex-direction: column; gap: 4px; }
     .contact-row { display: flex; align-items: center; gap: 16px; padding: 24px 0; border-bottom: 1px dashed var(--nothing-border); }
     .contact-row:last-child { border-bottom: none; }
-    .contact-row-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nothing-gray); width: 100px; flex-shrink: 0; }
+    .contact-row-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nothing-red); width: 100px; flex-shrink: 0; } /* 🔴 Red Row Label */
     .contact-row-value { font-size: 14px; color: var(--nothing-white); font-family: var(--font-mono); }
     .contact-row-value a { color: inherit; text-decoration: none; transition: color 0.2s; }
-    .contact-row-value a:hover { color: var(--nothing-gray); }
+    .contact-row-value a:hover { color: var(--nothing-red); }
     
     .contact-form { display: flex; flex-direction: column; gap: 12px; }
     .form-row { position: relative; background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 14px; transition: border-color 0.2s ease; }
@@ -215,12 +218,12 @@
     .form-row label { position: absolute; top: 24px; left: 24px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nothing-gray); pointer-events: none; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
     .form-row input:focus ~ label, .form-row input:not(:placeholder-shown) ~ label,
     .form-row textarea:focus ~ label, .form-row textarea:not(:placeholder-shown) ~ label {
-      top: 8px; font-size: 9px; color: var(--nothing-gray);
+      top: 8px; font-size: 9px; color: var(--nothing-red); /* 🔴 Red Focused Text Label */
     }
-    .form-row:focus-within { border-color: var(--nothing-white); }
+    .form-row:focus-within { border-color: var(--nothing-red); } /* 🔴 Red Border Focus */
     .form-submit { margin-top: 12px; }
     .btn-submit { width: 100%; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; background: var(--nothing-white); color: var(--nothing-black); padding: 18px; border-radius: 28px; border: none; font-weight: 700; cursor: none; transition: all 0.2s; }
-    .btn-submit:hover { opacity: 0.9; box-shadow: 0 0 15px rgba(255,255,255,0.2); }
+    .btn-submit:hover { background: var(--nothing-red); color: var(--nothing-white); box-shadow: 0 0 20px rgba(255,0,0,0.4); }
 
     /* ============ FOOTER ============ */
     footer {
@@ -231,10 +234,11 @@
     .footer-copy { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-gray); }
     .footer-links { display: flex; gap: 32px; }
     .footer-links a { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nothing-gray); text-decoration: none; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--nothing-white); }
+    .footer-links a:hover { color: var(--nothing-red); }
     .back-top { width: 44px; height: 44px; background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: none; transition: all 0.2s; }
-    .back-top:hover { border-color: var(--nothing-white); }
+    .back-top:hover { border-color: var(--nothing-red); background: rgba(255, 0, 0, 0.05); }
     .back-top svg { width: 14px; height: 14px; fill: var(--nothing-white); }
+    .back-top:hover svg { fill: var(--nothing-red); }
 
     /* ============ ANIMATIONS ============ */
     .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -244,7 +248,7 @@
     .mobile-menu { display: none; position: fixed; inset: 0; background: var(--nothing-black); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
     .mobile-menu.open { display: flex; }
     .mobile-menu a { font-family: var(--font-mono); font-size: 32px; color: var(--nothing-gray); text-decoration: none; transition: color 0.2s; text-transform: uppercase; letter-spacing: -0.02em; }
-    .mobile-menu a:hover { color: var(--nothing-white); }
+    .mobile-menu a:hover { color: var(--nothing-red); }
 
     /* ============ RESPONSIVE MEDIA HOOKS ============ */
     @media (max-width: 900px) {
@@ -296,6 +300,7 @@
 
 <section id="hero">
   <div class="hero-grid"></div>
+  <!-- Interactive Red Cosmic Wave Canvas Layer -->
   <canvas class="cosmic-canvas" id="cosmicCanvas"></canvas>
 
   <h1 class="hero-name ndot-header fade-up">
@@ -317,6 +322,20 @@
     </div>
   </div>
 </section>
+
+<!-- 🔴 TICKER MARQUEE COMPONENT EXACTLY POSITIONED ABOVE PROFESSIONAL SUMMARY -->
+<div class="nothing-ticker-container">
+  <div class="nothing-ticker-wrap">
+    <div class="ticker-item">Gyanenderan Portfolio OS <span>//</span> Version 2.0</div>
+    <div class="ticker-item">Full Stack Web Architecture Client</div>
+    <div class="ticker-item">Continuous Deployment via Vercel Network</div>
+    <div class="ticker-item">Tech-Noir Red Glyph Subsystem Layer</div>
+    <div class="ticker-item">Gyanenderan Portfolio OS <span>//</span> Version 2.0</div>
+    <div class="ticker-item">Full Stack Web Architecture Client</div>
+    <div class="ticker-item">Continuous Deployment via Vercel Network</div>
+    <div class="ticker-item">Tech-Noir Red Glyph Subsystem Layer</div>
+  </div>
+</div>
 
 <section id="about">
   <div class="section-header fade-up">
@@ -429,19 +448,6 @@
   </div>
 </section>
 
-<div class="nothing-ticker-container">
-  <div class="nothing-ticker-wrap">
-    <div class="ticker-item">Gyanenderan Portfolio OS // Version 2.0</div>
-    <div class="ticker-item">Full Stack Web Architecture Client</div>
-    <div class="ticker-item">Continuous Deployment via Vercel Network</div>
-    <div class="ticker-item">Tech-Noir Digital Interface Layer</div>
-    <div class="ticker-item">Gyanenderan Portfolio OS // Version 2.0</div>
-    <div class="ticker-item">Full Stack Web Architecture Client</div>
-    <div class="ticker-item">Continuous Deployment via Vercel Network</div>
-    <div class="ticker-item">Tech-Noir Digital Interface Layer</div>
-  </div>
-</div>
-
 <section id="projects">
   <div class="section-header fade-up">
     <span class="section-num">03 — Projects</span>
@@ -449,6 +455,7 @@
     <div class="divider"></div>
   </div>
   <div class="projects-list fade-up">
+    <!-- Project 01: EdgeSync -->
     <a href="https://edge-sync-app-theta.vercel.app/" target="_blank" class="project-item">
       <div class="project-num">01</div>
       <div class="project-content">
@@ -465,6 +472,7 @@
       <div class="project-arrow">↗</div>
     </a>
     
+    <!-- Project 02: AIDLEX -->
     <div class="project-item">
       <div class="project-num">02</div>
       <div class="project-content">
@@ -481,6 +489,7 @@
       <div class="project-arrow">↗</div>
     </div>
     
+    <!-- Project 03: Full Stack Web Application -->
     <div class="project-item">
       <div class="project-num">03</div>
       <div class="project-content">
@@ -498,6 +507,7 @@
       <div class="project-arrow">→</div>
     </div>
     
+    <!-- Project 04: NEOASSIST -->
     <div class="project-item">
       <div class="project-num">04</div>
       <div class="project-content">
@@ -534,9 +544,9 @@
         <span class="edu-card-label">Languages</span>
         <h3>Communication</h3>
         <div style="margin-top:16px;display:flex;flex-direction:column;gap:12px">
-          <div><span style="font-family:var(--font-mono);font-size:12px;color:var(--nothing-white)">Tamil</span> <span style="font-size:12px;color:var(--nothing-gray);margin-left:8px">Bilingual / C2</span></div>
-          <div><span style="font-family:var(--font-mono);font-size:12px;color:var(--nothing-white)">English</span> <span style="font-size:12px;color:var(--nothing-gray);margin-left:8px">Intermediate / B1</span></div>
-          <div><span style="font-family:var(--font-mono);font-size:12px;color:var(--nothing-white)">Telugu</span> <span style="font-size:12px;color:var(--nothing-gray);margin-left:8px">Beginner / A1</span></div>
+          <div><span style="font-family:var(--font-mono);font-size:12px;color:var(--nothing-white)">Tamil</span> <span style="font-size:12px;color:var(--nothing-red);margin-left:8px">Bilingual / C2</span></div>
+          <div><span style="font-family:var(--font-mono);font-size:12px;color:var(--nothing-white)">English</span> <span style="font-size:12px;color:var(--nothing-red);margin-left:8px">Intermediate / B1</span></div>
+          <div><span style="font-family:var(--font-mono);font-size:12px;color:var(--nothing-white)">Telugu</span> <span style="font-size:12px;color:var(--nothing-red);margin-left:8px">Beginner / A1</span></div>
         </div>
       </div>
     </div>
@@ -570,7 +580,7 @@
             <div class="cert-courses">Python For Beginners</div>
           </div>
           <div class="cert-year">2025</div>
-        </li>
+          </li>
       </ul>
     </div>
   </div>
@@ -652,19 +662,19 @@
   document.querySelectorAll('a,button,.project-item').forEach(el => { 
     el.addEventListener('mouseenter', () => { 
       cursor.style.transform = 'scale(2.5)'; 
-      ring.style.transform = 'scale(1.2)'; 
+      ring.style.transform = 'scale(1.3)'; 
       ring.style.borderColor = 'var(--nothing-red)'; 
-      ring.style.boxShadow = '0 0 10px rgba(255, 0, 0, 0.5)';
+      ring.style.boxShadow = '0 0 14px rgba(255, 0, 0, 0.7)';
     }); 
     el.addEventListener('mouseleave', () => { 
       cursor.style.transform = 'scale(1)'; 
       ring.style.transform = 'scale(1)'; 
-      ring.style.borderColor = 'var(--nothing-white)'; 
+      ring.style.borderColor = 'var(--nothing-red)'; 
       ring.style.boxShadow = 'none';
     }); 
   });
 
-  // Cosmic Fluid Wave Engine (Fine-tuned Canvas Speed & Amplitude)
+  // 🔴 Red Cosmic Fluid Wave Engine (Fine-tuned Canvas Speed & Amplitude)
   const canvas = document.getElementById('cosmicCanvas');
   const ctx = canvas.getContext('2d');
   let width = canvas.width = window.innerWidth;
@@ -676,7 +686,7 @@
   });
 
   let points = [];
-  const totalPoints = 8; // Increased granularity
+  const totalPoints = 8;
   for(let i = 0; i <= totalPoints; i++) {
     points.push({
       x: (width / totalPoints) * i,
@@ -688,15 +698,15 @@
 
   function drawCosmicWaves() {
     ctx.clearRect(0, 0, width, height);
-    ctx.strokeStyle = 'rgba(142, 142, 147, 0.22)';
-    ctx.lineWidth = 1.2;
-    ctx.setLineDash([5, 5]);
+    ctx.strokeStyle = 'rgba(255, 0, 0, 0.28)'; // 🔴 Boosted Red Line Transparency
+    ctx.lineWidth = 1.3;
+    ctx.setLineDash([5, 4]);
     
     ctx.beginPath();
     for(let i = 0; i < points.length; i++) {
       let p = points[i];
       p.angle += p.speed;
-      let waveOffset = Math.sin(p.angle) * 45; // Enhanced amplitude fluid motions
+      let waveOffset = Math.sin(p.angle) * 45;
       let currentY = p.y + waveOffset;
       
       if(i === 0) ctx.moveTo(p.x, currentY);
