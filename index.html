@@ -16,9 +16,9 @@
       --nothing-white: #F5F5F7;
       --nothing-black: #0B0B0C;
       --nothing-dark: #161618;
-      --nothing-gray: #6E6E73;
+      --nothing-gray: #8E8E93;
       --nothing-border: #2C2C2E;
-      --nothing-glass: rgba(22, 22, 24, 0.7);
+      --nothing-glass: rgba(11, 11, 12, 0.8);
       --font-mono: 'Space Mono', monospace;
       --font-body: 'Inter', sans-serif;
     }
@@ -43,16 +43,16 @@
     .mono { font-family: var(--font-mono); }
     .label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-gray); }
     
-    /* Nothing Dot Matrix Custom Engine Layout Headers */
+    /* 🔴 FIXED: 100% Solid & Clear Nothing Monospaced Title Engine */
     .ndot-header {
       font-family: var(--font-mono);
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: -0.03em;
-      background: linear-gradient(90deg, #fff 70%, rgba(255,255,255,0.1) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 2px 2px var(--nothing-black);
+      letter-spacing: -0.04em;
+      color: var(--nothing-white);
+      text-shadow: none;
+      background: none;
+      -webkit-text-fill-color: initial;
     }
 
     /* ============ NAV ============ */
@@ -102,13 +102,13 @@
     .cosmic-canvas {
       position: absolute; inset: 0; pointer-events: none; opacity: 0.45; z-index: 1;
     }
-    .hero-name { font-size: clamp(64px, 12vw, 150px); line-height: 0.9; color: var(--nothing-white); position: relative; z-index: 2; margin-bottom: 20px; }
+    .hero-name { font-size: clamp(54px, 10vw, 120px); line-height: 0.95; color: var(--nothing-white); position: relative; z-index: 2; margin-bottom: 20px; }
     .hero-name .accent { color: var(--nothing-gray); }
     .hero-bottom { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 40px; flex-wrap: wrap; gap: 32px; position: relative; z-index: 2; }
     .hero-title { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--nothing-gray); max-width: 380px; line-height: 1.8; }
     .hero-title strong { color: var(--nothing-white); display: block; font-size: 15px; margin-bottom: 10px; font-weight: 500; }
     .hero-scroll { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nothing-gray); display: flex; align-items: center; gap: 12px; }
-    .scroll-line { width: 40px; height: 1px; background: dotted var(--nothing-border); border-top: 1px dotted var(--nothing-gray); display: inline-block; }
+    .scroll-line { width: 40px; height: 1px; border-top: 1px dotted var(--nothing-gray); display: inline-block; }
     .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
     
     /* Nothing Rounded-Capsule Buttons */
@@ -121,7 +121,7 @@
     section { padding: 140px 48px; border-bottom: 1px dashed var(--nothing-border); position: relative; }
     .section-header { margin-bottom: 80px; }
     .section-num { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-red); letter-spacing: 0.2em; margin-bottom: 16px; display: block; }
-    .section-title { font-size: clamp(40px, 6vw, 80px); color: var(--nothing-white); }
+    .section-title { font-size: clamp(36px, 5vw, 64px); color: var(--nothing-white); }
     .divider { width: 30px; height: 1px; background: var(--nothing-gray); margin-top: 24px; }
 
     /* ============ ABOUT ============ */
@@ -631,7 +631,7 @@
   animRing();
   document.querySelectorAll('a,button,.project-item').forEach(el => { el.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2.5)'; ring.style.transform = 'scale(1.2)'; ring.style.borderColor = 'var(--nothing-red)'; }); el.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; ring.style.transform = 'scale(1)'; ring.style.borderColor = 'var(--nothing-white)'; }); });
 
-  // Cosmic Interactive Wave Engine (Canvas Based Optimization)
+  // Cosmic Interactive Wave Engine
   const canvas = document.getElementById('cosmicCanvas');
   const ctx = canvas.getContext('2d');
   let width = canvas.width = window.innerWidth;
@@ -656,15 +656,14 @@
 
   function drawCosmicWaves() {
     ctx.clearRect(0, 0, width, height);
-    ctx.strokeStyle = 'rgba(110, 110, 115, 0.15)';
+    ctx.strokeStyle = 'rgba(142, 142, 147, 0.15)';
     ctx.lineWidth = 1.5;
-    ctx.setLineDash([4, 4]); // Tech-Noir broken matrix wave lines
+    ctx.setLineDash([4, 4]);
     
     ctx.beginPath();
     for(let i = 0; i < points.length; i++) {
       let p = points[i];
       p.angle += p.speed;
-      // Synthesize elegant wave displacement
       let waveOffset = Math.sin(p.angle) * 35;
       let currentY = p.y + waveOffset;
       
@@ -724,7 +723,6 @@
         alert('Message Dispatched Successfully via EmailJS!');
         submitBtn.innerText = originalText;
         submitBtn.disabled = false;
-        // Clean form inputs
         document.getElementById('name').value = "";
         document.getElementById('email').value = "";
         document.getElementById('subject').value = "";
