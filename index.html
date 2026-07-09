@@ -7,14 +7,9 @@
   <title>Gyanenderan T – Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
-    /* ============ RESET & 4-COLOR BALANCED VARIABLES ============ */
+    /* ============ RESET & VARIABLES ============ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --nothing-red: #FF0000;
@@ -30,15 +25,12 @@
     html { scroll-behavior: smooth; background: var(--nothing-black); }
     body { font-family: var(--font-body); background: var(--nothing-black); color: var(--nothing-white); overflow-x: hidden; cursor: none; -webkit-font-smoothing: antialiased; }
 
-    /* 🔴 THREE.JS CANVAS CONTAINER LAYER */
-    #three-canvas-container {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      z-index: -1; pointer-events: none; background: var(--nothing-black);
-    }
+    /* Three.js Layer Integration */
+    #webgl-canvas-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; pointer-events: none; }
 
-    /* Custom Matrix Dots Cursor Subsystem */
+    /* Nothing OS Dot Matrix Cursor Customizer - 🔴 Added Red Matrix Pulse */
     .cursor { width: 6px; height: 6px; background: var(--nothing-red); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; }
-    .cursor-ring { width: 40px; height: 40px; border: 1px dotted var(--nothing-red); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.08s ease-out; opacity: 0.6; }
+    .cursor-ring { width: 40px; height: 40px; border: 1px dotted var(--nothing-red); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.08s ease-out; opacity: 0.5; }
 
     @media (max-width: 900px) {
       .cursor, .cursor-ring { display: none !important; }
@@ -50,33 +42,17 @@
     ::-webkit-scrollbar-track { background: var(--nothing-black); }
     ::-webkit-scrollbar-thumb { background: var(--nothing-red); border-radius: 10px; }
 
-    /* ============ NOTHING DOT MATRIX TYPOGRAPHY ENGINE ============ */
+    /* ============ TYPOGRAPHY & EXTRA UTILITIES ============ */
+    .mono { font-family: var(--font-mono); }
+    .label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-gray); }
+    
     .ndot-header {
       font-family: var(--font-mono);
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: -0.04em;
       color: var(--nothing-white);
-      display: inline-block;
-      position: relative;
-      background: var(--nothing-white);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Ccircle cx='4' cy='4' r='2.2' fill='%23000'/%3E%3C/svg%3E");
-      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Ccircle cx='4' cy='4' r='2.2' fill='%23000'/%3E%3C/svg%3E");
-      -webkit-mask-size: 6px 6px;
-      mask-size: 6px 6px;
     }
-    
-    .ndot-header-red {
-      background: var(--nothing-red);
-      -webkit-background-clip: text;
-      background-clip: text;
-      filter: drop-shadow(0 0 6px rgba(255, 0, 0, 0.6));
-    }
-
-    .mono { font-family: var(--font-mono); }
-    .label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-gray); }
 
     /* ============ NAV ============ */
     nav {
@@ -92,12 +68,13 @@
     .nav-logo { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--nothing-white); text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; line-height: 1.4; }
     .nav-logo span { color: var(--nothing-gray); font-weight: 400; }
     
+    /* 🔴 Nav Status Light Glow */
     .nav-status-dot {
       width: 6px; height: 6px; background: var(--nothing-red); border-radius: 50%; display: inline-block;
       animation: pulse-nav 1.2s infinite ease-in-out; flex-shrink: 0; order: -1;
     }
     @keyframes pulse-nav {
-      0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 12px 3px rgba(255, 0, 0, 0.85); }
+      0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 10px 2px rgba(255, 0, 0, 0.8); }
       50% { transform: scale(1.4); opacity: 0.4; box-shadow: 0 0 4px 1px rgba(255, 0, 0, 0.2); }
     }
 
@@ -105,14 +82,14 @@
     .nav-links a { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nothing-gray); text-decoration: none; transition: color 0.2s ease; }
     .nav-links a:hover { color: var(--nothing-red); }
     .nav-cta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; background: var(--nothing-white); color: var(--nothing-black); padding: 10px 24px; text-decoration: none; font-weight: 700; border-radius: 20px; transition: all 0.2s ease; border: 1px solid transparent; }
-    .nav-cta:hover { background: var(--nothing-red); color: var(--nothing-white); border-color: var(--nothing-red); box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); }
+    .nav-cta:hover { background: var(--nothing-red); color: var(--nothing-white); border-color: var(--nothing-red); box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); }
     .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; }
     .hamburger span { display: block; width: 20px; height: 1px; background: var(--nothing-white); transition: all 0.3s; }
 
     /* ============ HERO ============ */
     #hero {
       min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 0 48px 100px; position: relative; overflow: hidden;
+      padding: 0 48px 100px; position: relative; overflow: hidden; z-index: 2;
     }
     .hero-grid {
       position: absolute; inset: 0;
@@ -120,27 +97,28 @@
       background-size: 24px 24px;
       opacity: 0.4;
     }
-    .hero-name { font-size: clamp(38px, 7.5vw, 90px); color: var(--nothing-white); position: relative; z-index: 2; margin-bottom: 20px; font-weight: 700; line-height: 1.2; word-wrap: break-word; }
+    .hero-name { font-size: clamp(54px, 10vw, 120px); line-height: 0.95; color: var(--nothing-white); position: relative; z-index: 2; margin-bottom: 20px; }
+    .hero-name .accent { color: var(--nothing-red); } /* 🔴 Changed Accent to Red */
     .hero-bottom { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 40px; flex-wrap: wrap; gap: 32px; position: relative; z-index: 2; }
     .hero-title { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--nothing-gray); max-width: 380px; line-height: 1.8; }
     .hero-title strong { color: var(--nothing-white); display: block; font-size: 15px; margin-bottom: 10px; font-weight: 500; }
     .hero-scroll { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nothing-gray); display: flex; align-items: center; gap: 12px; }
-    .scroll-line { width: 40px; height: 1px; border-top: 1px dotted var(--nothing-red); display: inline-block; }
+    .scroll-line { width: 40px; height: 1px; border-top: 1px dotted var(--nothing-red); display: inline-block; } /* 🔴 Red Scroll Line */
     .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
     
     .btn-primary { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; background: var(--nothing-white); color: var(--nothing-black); padding: 14px 32px; text-decoration: none; font-weight: 700; border-radius: 24px; transition: all 0.3s ease; border: 1px solid transparent; cursor: none; }
-    .btn-primary:hover { background: var(--nothing-red); color: var(--nothing-white); border-color: var(--nothing-red); box-shadow: 0 0 25px rgba(255, 0, 0, 0.6); }
+    .btn-primary:hover { background: var(--nothing-red); color: var(--nothing-white); border-color: var(--nothing-red); box-shadow: 0 0 20px rgba(255, 0, 0, 0.4); }
     .btn-outline { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; background: transparent; color: var(--nothing-white); padding: 14px 32px; text-decoration: none; border-radius: 24px; border: 1px solid var(--nothing-border); transition: all 0.3s ease; cursor: none; }
-    .btn-outline:hover { border-color: var(--nothing-red); color: var(--nothing-red); background: rgba(255, 0, 0, 0.03); }
+    .btn-outline:hover { border-color: var(--nothing-red); color: var(--nothing-red); background: rgba(255, 0, 0, 0.02); }
 
     /* ============ SECTION CONFIGURATIONS ============ */
-    section { padding: 140px 48px; border-bottom: 1px dashed var(--nothing-border); position: relative; }
+    section { padding: 140px 48px; border-bottom: 1px dashed var(--nothing-border); position: relative; z-index: 2; }
     .section-header { margin-bottom: 80px; }
     .section-num { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-red); letter-spacing: 0.2em; margin-bottom: 16px; display: block; }
-    .section-title { font-size: clamp(32px, 5vw, 56px); margin-bottom: 8px; }
-    .divider { width: 40px; height: 1px; background: var(--nothing-red); margin-top: 24px; box-shadow: 0 0 8px var(--nothing-red); }
+    .section-title { font-size: clamp(36px, 5vw, 64px); color: var(--nothing-white); }
+    .divider { width: 30px; height: 1px; background: var(--nothing-red); margin-top: 24px; } /* 🔴 Red Dividers */
 
-    /* ============ DYNAMIC HORIZONTAL TEXT TICKER (MARQUEE) ============ */
+    /* ============ 🔴 TEXT TICKER (MARQUEE) - MOVED ABOVE PROFESSIONAL SUMMARY ============ */
     .nothing-ticker-container {
       width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;
       background: var(--nothing-dark); border-top: 1px solid var(--nothing-border); border-bottom: 1px solid var(--nothing-border);
@@ -152,7 +130,7 @@
       font-family: var(--font-mono); font-size: 13px; font-weight: 700; text-transform: uppercase;
       color: var(--nothing-white); letter-spacing: 0.12em; padding: 0 40px; display: flex; align-items: center; gap: 16px; white-space: nowrap;
     }
-    .ticker-item span { color: var(--nothing-red); }
+    .ticker-item span { color: var(--nothing-red); } /* Highlight matrix dots */
     .ticker-item::after { content: '///'; color: var(--nothing-red); font-size: 12px; margin-left: 40px; letter-spacing: 2px; }
     @keyframes marquee-scroll {
       0% { transform: translateX(0); }
@@ -166,18 +144,18 @@
     .about-text p strong { color: var(--nothing-white); font-weight: 500; }
     
     .about-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .about-card { background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 16px; padding: 32px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); position: relative; overflow: hidden; }
-    .about-card:hover { border-color: var(--nothing-red); background: var(--nothing-black); transform: translateY(-4px); box-shadow: 0 0 15px rgba(255, 0, 0, 0.2); }
-    .about-card-icon { font-size: 20px; color: var(--nothing-red); margin-bottom: 16px; font-family: var(--font-mono); font-weight: bold; }
+    .about-card { background: var(--nothing-glass); backdrop-filter: blur(10px); border: 1px solid var(--nothing-border); border-radius: 16px; padding: 32px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); position: relative; overflow: hidden; }
+    .about-card:hover { border-color: var(--nothing-red); background: var(--nothing-black); transform: translateY(-4px); } /* 🔴 Red Hover Border */
+    .about-card-icon { font-size: 20px; color: var(--nothing-red); margin-bottom: 16px; font-family: var(--font-mono); font-weight: bold; } /* 🔴 Red Icons */
     .about-card h4 { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nothing-white); margin-bottom: 12px; }
     .about-card p { font-size: 13px; color: var(--nothing-gray); line-height: 1.6; }
 
     /* ============ SKILLS ============ */
     #skills { background: transparent; }
     .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .skill-cat { background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 20px; padding: 40px 36px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-    .skill-cat:hover { border-color: var(--nothing-red); transform: translateY(-4px); box-shadow: 0 0 15px rgba(255, 0, 0, 0.2); }
-    .skill-cat-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-red); margin-bottom: 20px; display: block; }
+    .skill-cat { background: var(--nothing-glass); backdrop-filter: blur(10px); border: 1px solid var(--nothing-border); border-radius: 20px; padding: 40px 36px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .skill-cat:hover { border-color: var(--nothing-red); transform: translateY(-4px); } /* 🔴 Red Hover Border */
+    .skill-cat-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-red); margin-bottom: 20px; display: block; } /* 🔴 Red labels */
     .skill-cat h3 { font-family: var(--font-mono); font-size: 20px; font-weight: 400; color: var(--nothing-white); margin-bottom: 24px; letter-spacing: -0.02em; }
     .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .skill-tag { font-family: var(--font-mono); font-size: 11px; padding: 6px 14px; border-radius: 14px; background: var(--nothing-black); border: 1px solid var(--nothing-border); color: var(--nothing-gray); letter-spacing: 0.05em; transition: all 0.2s; }
@@ -186,10 +164,10 @@
     /* ============ PROJECTS ============ */
     #projects { background: transparent; }
     .projects-list { display: flex; flex-direction: column; gap: 0; }
-    .project-item { display: grid; grid-template-columns: 80px 1fr auto; align-items: center; gap: 40px; padding: 44px 16px; border-top: 1px solid var(--nothing-border); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); cursor: none; text-decoration: none; border-radius: 12px; }
-    .project-item:last-child { border-bottom: 1px solid var(--nothing-border); }
-    .project-item:hover { background: var(--nothing-dark); border-top-color: var(--nothing-red); border-bottom-color: var(--nothing-red); padding-left: 24px; padding-right: 24px; }
-    .project-item:hover .project-num { color: var(--nothing-red); }
+    .project-item { display: grid; grid-template-columns: 80px 1fr auto; align-items: center; gap: 40px; padding: 44px 16px; border-top: 1px dashed var(--nothing-border); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); cursor: none; text-decoration: none; border-radius: 12px; }
+    .project-item:last-child { border-bottom: 1px dashed var(--nothing-border); }
+    .project-item:hover { background: var(--nothing-dark); border-top-color: var(--nothing-red); border-bottom-color: var(--nothing-red); padding-left: 24px; padding-right: 24px; } /* 🔴 Red Border-flashes */
+    .project-item:hover .project-num { color: var(--nothing-red); } /* 🔴 Red Numbers on Hover */
     .project-item:hover .project-arrow { color: var(--nothing-red); transform: translate(6px, -6px); }
     .project-num { font-family: var(--font-mono); font-size: 24px; color: var(--nothing-border); transition: color 0.2s; }
     .project-cat { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-gray); margin-bottom: 12px; }
@@ -202,19 +180,19 @@
     /* ============ EDUCATION ============ */
     #education { background: transparent; }
     .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
-    .edu-card { background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 24px; padding: 48px; position: relative; overflow: hidden; transition: all 0.3s ease; }
-    .edu-card:hover { border-color: var(--nothing-red); box-shadow: 0 0 15px rgba(255, 0, 0, 0.2); }
-    .edu-card::before { content: ''; position: absolute; top: 24px; right: 24px; width: 6px; height: 6px; background: var(--nothing-red); border-radius: 50%; box-shadow: 0 0 8px 2px var(--nothing-red); }
+    .edu-card { background: var(--nothing-glass); backdrop-filter: blur(10px); border: 1px solid var(--nothing-border); border-radius: 24px; padding: 48px; position: relative; overflow: hidden; transition: all 0.3s ease; }
+    .edu-card:hover { border-color: var(--nothing-red); } /* 🔴 Red Hover Border */
+    .edu-card::before { content: ''; position: absolute; top: 24px; right: 24px; width: 6px; height: 6px; background: var(--nothing-red); border-radius: 50%; box-shadow: 0 0 8px 1px var(--nothing-red); }
     .edu-card-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-gray); margin-bottom: 24px; display: block; }
     .edu-card h3 { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--nothing-white); margin-bottom: 12px; }
     .edu-card .institution { font-size: 14px; color: var(--nothing-gray); margin-bottom: 20px; }
-    .edu-card .year { font-family: var(--font-mono); font-size: 12px; color: var(--nothing-red); }
+    .edu-card .year { font-family: var(--font-mono); font-size: 12px; color: var(--nothing-red); } /* 🔴 Red Timeline Text */
     .cert-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-    .cert-item { background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 16px; padding: 24px; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; transition: all 0.3s ease; }
+    .cert-item { background: var(--nothing-glass); backdrop-filter: blur(10px); border: 1px solid var(--nothing-border); border-radius: 16px; padding: 24px; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; transition: all 0.3s ease; }
     .cert-item:hover { border-color: var(--nothing-red); transform: scale(1.01); }
     .cert-name { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--nothing-white); margin-bottom: 6px; }
     .cert-courses { font-size: 13px; color: var(--nothing-gray); }
-    .cert-year { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-red); white-space: nowrap; }
+    .cert-year { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-red); white-space: nowrap; } /* 🔴 Red Year Label */
 
     /* ============ CONTACT ============ */
     #contact { background: transparent; }
@@ -223,13 +201,13 @@
     .contact-details { display: flex; flex-direction: column; gap: 4px; }
     .contact-row { display: flex; align-items: center; gap: 16px; padding: 24px 0; border-bottom: 1px dashed var(--nothing-border); }
     .contact-row:last-child { border-bottom: none; }
-    .contact-row-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nothing-red); width: 100px; flex-shrink: 0; }
+    .contact-row-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nothing-red); width: 100px; flex-shrink: 0; } /* 🔴 Red Row Label */
     .contact-row-value { font-size: 14px; color: var(--nothing-white); font-family: var(--font-mono); }
     .contact-row-value a { color: inherit; text-decoration: none; transition: color 0.2s; }
     .contact-row-value a:hover { color: var(--nothing-red); }
     
     .contact-form { display: flex; flex-direction: column; gap: 12px; }
-    .form-row { position: relative; background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 14px; transition: border-color 0.2s ease; }
+    .form-row { position: relative; background: var(--nothing-glass); backdrop-filter: blur(10px); border: 1px solid var(--nothing-border); border-radius: 14px; transition: border-color 0.2s ease; }
     .form-row input, .form-row textarea {
       width: 100%; background: transparent; border: none; outline: none;
       font-family: var(--font-body); font-size: 14px; color: var(--nothing-white);
@@ -239,18 +217,18 @@
     .form-row label { position: absolute; top: 24px; left: 24px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nothing-gray); pointer-events: none; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
     .form-row input:focus ~ label, .form-row input:not(:placeholder-shown) ~ label,
     .form-row textarea:focus ~ label, .form-row textarea:not(:placeholder-shown) ~ label {
-      top: 8px; font-size: 9px; color: var(--nothing-red);
+      top: 8px; font-size: 9px; color: var(--nothing-red); /* 🔴 Red Focused Text Label */
     }
-    .form-row:focus-within { border-color: var(--nothing-red); }
+    .form-row:focus-within { border-color: var(--nothing-red); } /* 🔴 Red Border Focus */
     .form-submit { margin-top: 12px; }
     .btn-submit { width: 100%; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; background: var(--nothing-white); color: var(--nothing-black); padding: 18px; border-radius: 28px; border: none; font-weight: 700; cursor: none; transition: all 0.2s; }
-    .btn-submit:hover { background: var(--nothing-red); color: var(--nothing-white); box-shadow: 0 0 20px rgba(255,0,0,0.5); }
+    .btn-submit:hover { background: var(--nothing-red); color: var(--nothing-white); box-shadow: 0 0 20px rgba(255,0,0,0.4); }
 
     /* ============ FOOTER ============ */
     footer {
       background: var(--nothing-black); padding: 60px 48px;
       display: flex; align-items: center; justify-content: space-between;
-      border-top: 1px dashed var(--nothing-border); flex-wrap: wrap; gap: 24px;
+      border-top: 1px dashed var(--nothing-border); flex-wrap: wrap; gap: 24px; z-index: 2; position: relative;
     }
     .footer-copy { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-gray); }
     .footer-links { display: flex; gap: 32px; }
@@ -286,7 +264,7 @@
 </head>
 <body>
 
-<div id="three-canvas-container"></div>
+<div id="webgl-canvas-container"></div>
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
@@ -319,13 +297,13 @@
 
 <section id="hero">
   <div class="hero-grid"></div>
+  <canvas class="cosmic-canvas" id="cosmicCanvas" style="display:none;"></canvas>
 
-  <h1 class="hero-name fade-up-target">
-    <span class="ndot-header">GYANENDERAN</span><br>
-    <span class="ndot-header ndot-header-red">THIRUMAL</span>
+  <h1 class="hero-name ndot-header">
+    GYANENDERAN<span class="accent"><br>THIRUMAL</span>
   </h1>
 
-  <div class="hero-bottom fade-up-target">
+  <div class="hero-bottom">
     <div class="hero-title">
       <strong>Full Stack Developer</strong>
       Building with modern web technologies &<br>full-stack development
@@ -354,10 +332,10 @@
   </div>
 </div>
 
-<section id="about" class="scroll-section">
+<section id="about">
   <div class="section-header">
     <span class="section-num">01 — About</span>
-    <h2 class="section-title"><span class="ndot-header">Professional</span><br><span class="ndot-header">Summary</span></h2>
+    <h2 class="section-title ndot-header">Professional<br>Summary</h2>
     <div class="divider"></div>
   </div>
   <div class="about-grid">
@@ -391,10 +369,10 @@
   </div>
 </section>
 
-<section id="skills" class="scroll-section">
+<section id="skills">
   <div class="section-header">
     <span class="section-num">02 — Skills</span>
-    <h2 class="section-title"><span class="ndot-header">Technical</span><br><span class="ndot-header">Expertise</span></h2>
+    <h2 class="section-title ndot-header">Technical<br>Expertise</h2>
     <div class="divider"></div>
   </div>
   <div class="skills-grid">
@@ -465,10 +443,10 @@
   </div>
 </section>
 
-<section id="projects" class="scroll-section">
+<section id="projects">
   <div class="section-header">
     <span class="section-num">03 — Projects</span>
-    <h2 class="section-title"><span class="ndot-header">Featured</span><br><span class="ndot-header">Work</span></h2>
+    <h2 class="section-title ndot-header">Featured<br>Work</h2>
     <div class="divider"></div>
   </div>
   <div class="projects-list">
@@ -539,10 +517,10 @@
   </div>
 </section>
 
-<section id="education" class="scroll-section">
+<section id="education">
   <div class="section-header">
     <span class="section-num">04 — Education</span>
-    <h2 class="section-title"><span class="ndot-header">Academic</span><br><span class="ndot-header">Background</span></h2>
+    <h2 class="section-title ndot-header">Academic<br>Background</h2>
     <div class="divider"></div>
   </div>
   <div class="edu-grid">
@@ -593,16 +571,16 @@
             <div class="cert-courses">Python For Beginners</div>
           </div>
           <div class="cert-year">2025</div>
-        </li>
+          </li>
       </ul>
     </div>
   </div>
 </section>
 
-<section id="contact" class="scroll-section">
+<section id="contact">
   <div class="section-header">
     <span class="section-num">05 — Contact</span>
-    <h2 class="section-title"><span class="ndot-header">Let's</span> <span class="ndot-header ndot-header-red">Work</span><br><span class="ndot-header">Together</span></h2>
+    <h2 class="section-title ndot-header">Let's Work<br>Together</h2>
     <div class="divider"></div>
   </div>
   <div class="contact-layout">
@@ -662,24 +640,40 @@
   </button>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
 <script>
-  // Register GSAP ScrollTrigger
+  // Register GSAP ScrollTrigger Subsystem
   gsap.registerPlugin(ScrollTrigger);
 
-  // 1. Cursor Engine Setup
+  // Cursor Engine
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
   let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx - 3 + 'px'; cursor.style.top = my - 3 + 'px'; });
-  function animRing() { rx += (mx - rx) * 0.2; ry += (my - ry) * 0.2; ring.style.left = rx - 20 + 'px'; ring.style.top = ry - 20 + 'px'; requestAnimationFrame(animRing); }
+  document.addEventListener('mousemove', e => { 
+    mx = e.clientX; 
+    my = e.clientY; 
+    cursor.style.left = mx - 3 + 'px'; 
+    cursor.style.top = my - 3 + 'px'; 
+  });
+  function animRing() { 
+    rx += (mx - rx) * 0.2; 
+    ry += (my - ry) * 0.2; 
+    ring.style.left = rx - 20 + 'px'; 
+    ring.style.top = ry - 20 + 'px'; 
+    requestAnimationFrame(animRing); 
+  }
   animRing();
   
-  document.querySelectorAll('a,button,.project-item,.btn-primary,.btn-outline').forEach(el => { 
+  // Glyph Red Glowing Matrix on interactive elements
+  document.querySelectorAll('a,button,.project-item').forEach(el => { 
     el.addEventListener('mouseenter', () => { 
       cursor.style.transform = 'scale(2.5)'; 
       ring.style.transform = 'scale(1.3)'; 
       ring.style.borderColor = 'var(--nothing-red)'; 
-      ring.style.boxShadow = '0 0 16px rgba(255, 0, 0, 0.85)';
+      ring.style.boxShadow = '0 0 14px rgba(255, 0, 0, 0.7)';
     }); 
     el.addEventListener('mouseleave', () => { 
       cursor.style.transform = 'scale(1)'; 
@@ -689,152 +683,140 @@
     }); 
   });
 
-  // 2. Three.js Cosmic Matrix Particles Scene Setup
-  const container = document.getElementById('three-canvas-container');
+  // ============ 🔴 NEW: THREE.JS 3D STORYTELLING ENGINE ============
+  const container = document.getElementById('webgl-canvas-container');
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.z = 30;
-
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   container.appendChild(renderer.domElement);
 
-  // Re-generate Dotted Grid Array via Three.js Points Material
-  const particleCount = 700;
+  // Synthesize 3D Cyber Matrix Particles Grid
+  const count = window.innerWidth < 600 ? 800 : 2500;
   const geometry = new THREE.BufferGeometry();
-  const positions = new Float32Array(particleCount * 3);
-  const colors = new Float32Array(particleCount * 3);
+  const positions = new Float32Array(count * 3);
+  const colors = new Float32Array(count * 3);
 
-  for (let i = 0; i < particleCount * 3; i += 3) {
-    // Generate scattered network constellation topology
-    positions[i] = (Math.random() - 0.5) * 80;
-    positions[i + 1] = (Math.random() - 0.5) * 60;
-    positions[i + 2] = (Math.random() - 0.5) * 40;
+  for(let i = 0; i < count * 3; i += 3) {
+    // Generate organic network waves distribution
+    positions[i] = (Math.random() - 0.5) * 45;
+    positions[i+1] = (Math.random() - 0.5) * 45;
+    positions[i+2] = (Math.random() - 0.5) * 35;
 
-    // Mix white/grey nodes with rare signature red emitters
-    if (Math.random() > 0.88) {
-      colors[i] = 1.0; colors[i + 1] = 0.0; colors[i + 2] = 0.0; // Pure Red
+    // Harmonize Nothing Core 4-Colors Balance (White, Gray, and Pure Red Node bursts)
+    if(Math.random() > 0.88) {
+      colors[i] = 1.0; colors[i+1] = 0.0; colors[i+2] = 0.0; // Pure Red Node Burst
+    } else if(Math.random() > 0.5) {
+      colors[i] = 0.96; colors[i+1] = 0.96; colors[i+2] = 0.97; // Nothing White
     } else {
-      colors[i] = 0.4; colors[i + 1] = 0.4; colors[i + 2] = 0.4; // Nothing Dull Grey
+      colors[i] = 0.55; colors[i+1] = 0.55; colors[i+2] = 0.57; // Cyber Gray
     }
   }
 
   geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-  // Circular Dot Texture representation using Canvas fallback inside PointMaterial
-  const pMaterial = new THREE.PointsMaterial({
-    size: 0.35,
+  // Circular Dot Hardware Matrix Simulation Texture Creation
+  const canvasDot = document.createElement('canvas');
+  canvasDot.width = 16; canvasDot.height = 16;
+  const ctxDot = canvasDot.getContext('2d');
+  const grad = ctxDot.createRadialGradient(8,8,0, 8,8,8);
+  grad.addColorStop(0, 'rgba(255,255,255,1)');
+  grad.addColorStop(0.4, 'rgba(255,255,255,0.8)');
+  grad.addColorStop(1, 'rgba(255,255,255,0)');
+  ctxDot.fillStyle = grad; ctxDot.fillRect(0,0,16,16);
+  const texture = new THREE.CanvasTexture(canvasDot);
+
+  const material = new THREE.PointsMaterial({
+    size: 0.22,
     vertexColors: true,
     transparent: true,
-    opacity: 0.7,
-    sizeAttenuation: true
+    opacity: 0.8,
+    map: texture,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
   });
 
-  const particleSystem = new THREE.Points(geometry, pMaterial);
-  scene.add(particleSystem);
+  const particleMesh = new THREE.Points(geometry, material);
+  scene.add(particleMesh);
+  camera.position.z = 18;
 
-  // Mouse Parallax Track inside Three.js
+  // Interactivity tracking metrics
   let targetX = 0, targetY = 0;
+  let mouseX = 0, mouseY = 0;
   document.addEventListener('mousemove', (e) => {
-    targetX = (e.clientX - window.innerWidth / 2) * 0.015;
-    targetY = (e.clientY - window.innerHeight / 2) * 0.015;
+    mouseX = (e.clientX / window.innerWidth) - 0.5;
+    mouseY = (e.clientY / window.innerHeight) - 0.5;
   });
 
-  // Render Loop
-  function animateThree() {
-    requestAnimationFrame(animateThree);
+  // Render Loop & Fluid Floating Matrix calculations
+  const clock = new THREE.Clock();
+  function tick() {
+    const elapsedTime = clock.getElapsedTime();
     
-    // Slow structural drift
-    particleSystem.rotation.y += 0.0008;
+    // Magnetic fluid convergence tracking mouse
+    targetX += (mouseX - targetX) * 0.05;
+    targetY += (mouseY - targetY) * 0.05;
     
-    // Interactive mouse inertia feedback
-    particleSystem.rotation.x += (targetY * 0.05 - particleSystem.rotation.x) * 0.05;
-    particleSystem.rotation.y += (targetX * 0.05 - particleSystem.rotation.y) * 0.05;
-
+    particleMesh.rotation.y = elapsedTime * 0.04 + (targetX * 0.3);
+    particleMesh.rotation.x = Math.sin(elapsedTime * 0.1) * 0.05 + (targetY * 0.3);
+    
     renderer.render(scene, camera);
+    requestAnimationFrame(tick);
   }
-  animateThree();
+  tick();
 
-  // Resize Handler
+  // Responsive Canvas Pipeline Window Hook
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
-  // 3. GSAP ScrollTrigger 3D Storytelling Layout Animations
-  // Hero load animations
-  gsap.from("#hero .hero-name .ndot-header", {
-    duration: 1.2,
-    y: 60,
-    opacity: 0,
-    stagger: 0.2,
-    ease: "power4.out"
-  });
-
-  gsap.from("#hero .hero-bottom", {
-    duration: 1.5,
-    opacity: 0,
-    y: 30,
-    delay: 0.6,
-    ease: "power3.out"
-  });
-
-  // Connect Three.js camera depth translation dynamically to page scroll metrics
-  gsap.to(camera.position, {
-    z: 15,
+  // ============ 🔴 GSAP STORYTELLING LAYOUT PIPELINE ============
+  // Morph 3D Grid Spatial state synchronously as the developer scrolls down
+  gsap.to(particleMesh.position, {
     scrollTrigger: {
-      trigger: "body",
-      start: "top top",
-      end: "bottom bottom",
-      scrub: 1
-    }
+      trigger: "#about", start: "top bottom", end: "bottom top", scrub: 1.2
+    },
+    z: 4, y: -2, x: -1
   });
 
-  // Core Section Headers Storyline Reveal
-  document.querySelectorAll('section').forEach((section) => {
-    const header = section.querySelector('.section-header');
-    const contentElements = section.querySelectorAll('.about-grid, .skills-grid, .projects-list, .edu-grid, .contact-layout');
-
-    if (header) {
-      gsap.from(header, {
-        opacity: 0,
-        x: -40,
-        duration: 1,
-        scrollTrigger: {
-          trigger: section,
-          start: "top 75%",
-          toggleActions: "play none none none"
-        }
-      });
-    }
-
-    if (contentElements.length > 0) {
-      gsap.from(contentElements, {
-        opacity: 0,
-        y: 50,
-        duration: 1.2,
-        stagger: 0.15,
-        scrollTrigger: {
-          trigger: section,
-          start: "top 65%",
-          toggleActions: "play none none none"
-        }
-      });
-    }
+  gsap.to(particleMesh.position, {
+    scrollTrigger: {
+      trigger: "#projects", start: "top bottom", end: "bottom top", scrub: 1.5
+    },
+    z: -3, y: 3, x: 2
   });
 
-  // Nav Scroll Style Toggle
+  // Smooth Reveal Sequences on UI elements matching Nothing Settings Flow
+  gsap.utils.toArray('section').forEach(section => {
+    const headerElements = section.querySelectorAll('.section-header, .about-grid, .skills-grid, .projects-list, .edu-grid, .contact-layout');
+    gsap.from(headerElements, {
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        toggleActions: "play none none none"
+      },
+      opacity: 0,
+      y: 40,
+      duration: 1,
+      stagger: 0.15,
+      ease: "power3.out"
+    });
+  });
+
+  // Nav scroll
   window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60); });
 
-  // Mobile menu links toggle
+  // Mobile menu
   document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
   function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
   document.getElementById('mobileMenu').addEventListener('click', e => { if(e.target === e.currentTarget) closeMobile(); });
 
-  // Contact form pipeline connected with EmailJS
+  // Contact form integrated with EmailJS pipeline
   function sendMail() {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
