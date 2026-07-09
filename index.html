@@ -5,12 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Gyanenderan T – Full Stack Developer Portfolio" />
   <title>Gyanenderan T – Portfolio</title>
-  <!-- Nothing OS Typography Setup -->
+  <!-- Nothing OS Core Font Systems -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  
+  <!-- GSAP & Three.js Framework CDNs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
   <style>
-    /* ============ RESET & VARIABLES ============ */
+    /* ============ RESET & 4-COLOR BALANCED VARIABLES ============ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --nothing-red: #FF0000;
@@ -26,9 +32,12 @@
     html { scroll-behavior: smooth; background: var(--nothing-black); }
     body { font-family: var(--font-body); background: var(--nothing-black); color: var(--nothing-white); overflow-x: hidden; cursor: none; -webkit-font-smoothing: antialiased; }
 
-    /* Nothing OS Dot Matrix Cursor Customizer - 🔴 Added Red Matrix Pulse */
+    /* WebGL Canvas Background */
+    #webgl-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; pointer-events: none; opacity: 0.6; }
+
+    /* Custom Matrix Dots Cursor Subsystem */
     .cursor { width: 6px; height: 6px; background: var(--nothing-red); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; }
-    .cursor-ring { width: 40px; height: 40px; border: 1px dotted var(--nothing-red); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.08s ease-out; opacity: 0.5; }
+    .cursor-ring { width: 40px; height: 40px; border: 1px dotted var(--nothing-red); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.08s ease-out; opacity: 0.6; }
 
     @media (max-width: 900px) {
       .cursor, .cursor-ring { display: none !important; }
@@ -40,17 +49,33 @@
     ::-webkit-scrollbar-track { background: var(--nothing-black); }
     ::-webkit-scrollbar-thumb { background: var(--nothing-red); border-radius: 10px; }
 
-    /* ============ TYPOGRAPHY & EXTRA UTILITIES ============ */
-    .mono { font-family: var(--font-mono); }
-    .label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-gray); }
-    
+    /* ============ 🔴 TRUE ACCURATE NOTHING DOT MATRIX TYPOGRAPHY ENGINE ============ */
     .ndot-header {
       font-family: var(--font-mono);
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: -0.04em;
+      letter-spacing: 0.08em;
       color: var(--nothing-white);
+      display: inline-block;
+      position: relative;
+      background: var(--nothing-white);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Ccircle cx='4' cy='4' r='2.2' fill='%23000'/%3E%3C/svg%3E");
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Ccircle cx='4' cy='4' r='2.2' fill='%23000'/%3E%3C/svg%3E");
+      -webkit-mask-size: 6px 6px;
+      mask-size: 6px 6px;
     }
+    
+    .ndot-header-red {
+      background: var(--nothing-red);
+      -webkit-background-clip: text;
+      background-clip: text;
+      filter: drop-shadow(0 0 6px rgba(255, 0, 0, 0.6));
+    }
+
+    .mono { font-family: var(--font-mono); }
+    .label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-gray); }
 
     /* ============ NAV ============ */
     nav {
@@ -66,13 +91,12 @@
     .nav-logo { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--nothing-white); text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; line-height: 1.4; }
     .nav-logo span { color: var(--nothing-gray); font-weight: 400; }
     
-    /* 🔴 Nav Status Light Glow */
     .nav-status-dot {
       width: 6px; height: 6px; background: var(--nothing-red); border-radius: 50%; display: inline-block;
       animation: pulse-nav 1.2s infinite ease-in-out; flex-shrink: 0; order: -1;
     }
     @keyframes pulse-nav {
-      0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 10px 2px rgba(255, 0, 0, 0.8); }
+      0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 12px 3px rgba(255, 0, 0, 0.85); }
       50% { transform: scale(1.4); opacity: 0.4; box-shadow: 0 0 4px 1px rgba(255, 0, 0, 0.2); }
     }
 
@@ -80,14 +104,14 @@
     .nav-links a { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nothing-gray); text-decoration: none; transition: color 0.2s ease; }
     .nav-links a:hover { color: var(--nothing-red); }
     .nav-cta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; background: var(--nothing-white); color: var(--nothing-black); padding: 10px 24px; text-decoration: none; font-weight: 700; border-radius: 20px; transition: all 0.2s ease; border: 1px solid transparent; }
-    .nav-cta:hover { background: var(--nothing-red); color: var(--nothing-white); border-color: var(--nothing-red); box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); }
+    .nav-cta:hover { background: var(--nothing-red); color: var(--nothing-white); border-color: var(--nothing-red); box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); }
     .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; }
     .hamburger span { display: block; width: 20px; height: 1px; background: var(--nothing-white); transition: all 0.3s; }
 
     /* ============ HERO ============ */
     #hero {
       min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 0 48px 100px; position: relative; overflow: hidden;
+      padding: 0 48px 100px; position: relative; overflow: hidden; z-index: 2;
     }
     .hero-grid {
       position: absolute; inset: 0;
@@ -95,31 +119,27 @@
       background-size: 24px 24px;
       opacity: 0.7;
     }
-    .cosmic-canvas {
-      position: absolute; inset: 0; pointer-events: none; opacity: 0.65; z-index: 1;
-    }
-    .hero-name { font-size: clamp(54px, 10vw, 120px); line-height: 0.95; color: var(--nothing-white); position: relative; z-index: 2; margin-bottom: 20px; }
-    .hero-name .accent { color: var(--nothing-red); } /* 🔴 Changed Accent to Red */
+    .hero-name { font-size: clamp(38px, 7.5vw, 90px); color: var(--nothing-white); position: relative; z-index: 2; margin-bottom: 20px; font-weight: 700; line-height: 1.2; word-wrap: break-word; }
     .hero-bottom { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 40px; flex-wrap: wrap; gap: 32px; position: relative; z-index: 2; }
     .hero-title { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--nothing-gray); max-width: 380px; line-height: 1.8; }
     .hero-title strong { color: var(--nothing-white); display: block; font-size: 15px; margin-bottom: 10px; font-weight: 500; }
     .hero-scroll { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nothing-gray); display: flex; align-items: center; gap: 12px; }
-    .scroll-line { width: 40px; height: 1px; border-top: 1px dotted var(--nothing-red); display: inline-block; } /* 🔴 Red Scroll Line */
+    .scroll-line { width: 40px; height: 1px; border-top: 1px dotted var(--nothing-red); display: inline-block; }
     .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
     
     .btn-primary { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; background: var(--nothing-white); color: var(--nothing-black); padding: 14px 32px; text-decoration: none; font-weight: 700; border-radius: 24px; transition: all 0.3s ease; border: 1px solid transparent; cursor: none; }
-    .btn-primary:hover { background: var(--nothing-red); color: var(--nothing-white); border-color: var(--nothing-red); box-shadow: 0 0 20px rgba(255, 0, 0, 0.4); }
+    .btn-primary:hover { background: var(--nothing-red); color: var(--nothing-white); border-color: var(--nothing-red); box-shadow: 0 0 25px rgba(255, 0, 0, 0.6); }
     .btn-outline { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; background: transparent; color: var(--nothing-white); padding: 14px 32px; text-decoration: none; border-radius: 24px; border: 1px solid var(--nothing-border); transition: all 0.3s ease; cursor: none; }
-    .btn-outline:hover { border-color: var(--nothing-red); color: var(--nothing-red); background: rgba(255, 0, 0, 0.02); }
+    .btn-outline:hover { border-color: var(--nothing-red); color: var(--nothing-red); background: rgba(255, 0, 0, 0.03); }
 
     /* ============ SECTION CONFIGURATIONS ============ */
-    section { padding: 140px 48px; border-bottom: 1px dashed var(--nothing-border); position: relative; }
+    section { padding: 140px 48px; border-bottom: 1px dashed var(--nothing-border); position: relative; z-index: 2; }
     .section-header { margin-bottom: 80px; }
     .section-num { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-red); letter-spacing: 0.2em; margin-bottom: 16px; display: block; }
-    .section-title { font-size: clamp(36px, 5vw, 64px); color: var(--nothing-white); }
-    .divider { width: 30px; height: 1px; background: var(--nothing-red); margin-top: 24px; } /* 🔴 Red Dividers */
+    .section-title { font-size: clamp(32px, 5vw, 56px); margin-bottom: 8px; }
+    .divider { width: 40px; height: 1px; background: var(--nothing-red); margin-top: 24px; box-shadow: 0 0 8px var(--nothing-red); }
 
-    /* ============ 🔴 TEXT TICKER (MARQUEE) - MOVED ABOVE PROFESSIONAL SUMMARY ============ */
+    /* ============ DYNAMIC HORIZONTAL TEXT TICKER (MARQUEE) ============ */
     .nothing-ticker-container {
       width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;
       background: var(--nothing-dark); border-top: 1px solid var(--nothing-border); border-bottom: 1px solid var(--nothing-border);
@@ -131,7 +151,7 @@
       font-family: var(--font-mono); font-size: 13px; font-weight: 700; text-transform: uppercase;
       color: var(--nothing-white); letter-spacing: 0.12em; padding: 0 40px; display: flex; align-items: center; gap: 16px; white-space: nowrap;
     }
-    .ticker-item span { color: var(--nothing-red); } /* Highlight matrix dots */
+    .ticker-item span { color: var(--nothing-red); }
     .ticker-item::after { content: '///'; color: var(--nothing-red); font-size: 12px; margin-left: 40px; letter-spacing: 2px; }
     @keyframes marquee-scroll {
       0% { transform: translateX(0); }
@@ -139,36 +159,36 @@
     }
 
     /* ============ ABOUT ============ */
-    #about { background: var(--nothing-black); }
+    #about { background: transparent; }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
     .about-text p { font-size: 16px; line-height: 1.8; color: var(--nothing-gray); margin-bottom: 24px; font-weight: 300; }
     .about-text p strong { color: var(--nothing-white); font-weight: 500; }
     
     .about-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .about-card { background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 16px; padding: 32px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); position: relative; overflow: hidden; }
-    .about-card:hover { border-color: var(--nothing-red); background: var(--nothing-black); transform: translateY(-4px); } /* 🔴 Red Hover Border */
-    .about-card-icon { font-size: 20px; color: var(--nothing-red); margin-bottom: 16px; font-family: var(--font-mono); font-weight: bold; } /* 🔴 Red Icons */
+    .about-card:hover { border-color: var(--nothing-red); background: var(--nothing-black); transform: translateY(-4px); box-shadow: 0 0 15px rgba(255, 0, 0, 0.2); }
+    .about-card-icon { font-size: 20px; color: var(--nothing-red); margin-bottom: 16px; font-family: var(--font-mono); font-weight: bold; }
     .about-card h4 { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nothing-white); margin-bottom: 12px; }
     .about-card p { font-size: 13px; color: var(--nothing-gray); line-height: 1.6; }
 
     /* ============ SKILLS ============ */
-    #skills { background: var(--nothing-black); }
+    #skills { background: transparent; }
     .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .skill-cat { background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 20px; padding: 40px 36px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-    .skill-cat:hover { border-color: var(--nothing-red); transform: translateY(-4px); } /* 🔴 Red Hover Border */
-    .skill-cat-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-red); margin-bottom: 20px; display: block; } /* 🔴 Red labels */
+    .skill-cat:hover { border-color: var(--nothing-red); transform: translateY(-4px); box-shadow: 0 0 15px rgba(255, 0, 0, 0.2); }
+    .skill-cat-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-red); margin-bottom: 20px; display: block; }
     .skill-cat h3 { font-family: var(--font-mono); font-size: 20px; font-weight: 400; color: var(--nothing-white); margin-bottom: 24px; letter-spacing: -0.02em; }
     .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .skill-tag { font-family: var(--font-mono); font-size: 11px; padding: 6px 14px; border-radius: 14px; background: var(--nothing-black); border: 1px solid var(--nothing-border); color: var(--nothing-gray); letter-spacing: 0.05em; transition: all 0.2s; }
     .skill-tag:hover { border-color: var(--nothing-red); color: var(--nothing-white); background: rgba(255, 0, 0, 0.04); }
 
     /* ============ PROJECTS ============ */
-    #projects { background: var(--nothing-black); }
+    #projects { background: transparent; }
     .projects-list { display: flex; flex-direction: column; gap: 0; }
     .project-item { display: grid; grid-template-columns: 80px 1fr auto; align-items: center; gap: 40px; padding: 44px 16px; border-top: 1px dashed var(--nothing-border); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); cursor: none; text-decoration: none; border-radius: 12px; }
     .project-item:last-child { border-bottom: 1px dashed var(--nothing-border); }
-    .project-item:hover { background: var(--nothing-dark); border-top-color: var(--nothing-red); border-bottom-color: var(--nothing-red); padding-left: 24px; padding-right: 24px; } /* 🔴 Red Border-flashes */
-    .project-item:hover .project-num { color: var(--nothing-red); } /* 🔴 Red Numbers on Hover */
+    .project-item:hover { background: var(--nothing-dark); border-top-color: var(--nothing-red); border-bottom-color: var(--nothing-red); padding-left: 24px; padding-right: 24px; }
+    .project-item:hover .project-num { color: var(--nothing-red); }
     .project-item:hover .project-arrow { color: var(--nothing-red); transform: translate(6px, -6px); }
     .project-num { font-family: var(--font-mono); font-size: 24px; color: var(--nothing-border); transition: color 0.2s; }
     .project-cat { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-gray); margin-bottom: 12px; }
@@ -179,30 +199,30 @@
     .project-arrow { font-family: var(--font-mono); font-size: 24px; color: var(--nothing-gray); transition: all 0.3s ease; }
 
     /* ============ EDUCATION ============ */
-    #education { background: var(--nothing-black); }
+    #education { background: transparent; }
     .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
     .edu-card { background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 24px; padding: 48px; position: relative; overflow: hidden; transition: all 0.3s ease; }
-    .edu-card:hover { border-color: var(--nothing-red); } /* 🔴 Red Hover Border */
-    .edu-card::before { content: ''; position: absolute; top: 24px; right: 24px; width: 6px; height: 6px; background: var(--nothing-red); border-radius: 50%; box-shadow: 0 0 8px 1px var(--nothing-red); }
+    .edu-card:hover { border-color: var(--nothing-red); box-shadow: 0 0 15px rgba(255, 0, 0, 0.2); }
+    .edu-card::before { content: ''; position: absolute; top: 24px; right: 24px; width: 6px; height: 6px; background: var(--nothing-red); border-radius: 50%; box-shadow: 0 0 8px 2px var(--nothing-red); }
     .edu-card-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-gray); margin-bottom: 24px; display: block; }
     .edu-card h3 { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--nothing-white); margin-bottom: 12px; }
     .edu-card .institution { font-size: 14px; color: var(--nothing-gray); margin-bottom: 20px; }
-    .edu-card .year { font-family: var(--font-mono); font-size: 12px; color: var(--nothing-red); } /* 🔴 Red Timeline Text */
+    .edu-card .year { font-family: var(--font-mono); font-size: 12px; color: var(--nothing-red); }
     .cert-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
     .cert-item { background: var(--nothing-dark); border: 1px solid var(--nothing-border); border-radius: 16px; padding: 24px; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; transition: all 0.3s ease; }
     .cert-item:hover { border-color: var(--nothing-red); transform: scale(1.01); }
     .cert-name { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--nothing-white); margin-bottom: 6px; }
     .cert-courses { font-size: 13px; color: var(--nothing-gray); }
-    .cert-year { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-red); white-space: nowrap; } /* 🔴 Red Year Label */
+    .cert-year { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-red); white-space: nowrap; }
 
     /* ============ CONTACT ============ */
-    #contact { background: var(--nothing-black); }
+    #contact { background: transparent; }
     .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
     .contact-info p { font-size: 16px; color: var(--nothing-gray); line-height: 1.8; margin-bottom: 48px; }
     .contact-details { display: flex; flex-direction: column; gap: 4px; }
     .contact-row { display: flex; align-items: center; gap: 16px; padding: 24px 0; border-bottom: 1px dashed var(--nothing-border); }
     .contact-row:last-child { border-bottom: none; }
-    .contact-row-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nothing-red); width: 100px; flex-shrink: 0; } /* 🔴 Red Row Label */
+    .contact-row-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nothing-red); width: 100px; flex-shrink: 0; }
     .contact-row-value { font-size: 14px; color: var(--nothing-white); font-family: var(--font-mono); }
     .contact-row-value a { color: inherit; text-decoration: none; transition: color 0.2s; }
     .contact-row-value a:hover { color: var(--nothing-red); }
@@ -218,18 +238,18 @@
     .form-row label { position: absolute; top: 24px; left: 24px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nothing-gray); pointer-events: none; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
     .form-row input:focus ~ label, .form-row input:not(:placeholder-shown) ~ label,
     .form-row textarea:focus ~ label, .form-row textarea:not(:placeholder-shown) ~ label {
-      top: 8px; font-size: 9px; color: var(--nothing-red); /* 🔴 Red Focused Text Label */
+      top: 8px; font-size: 9px; color: var(--nothing-red);
     }
-    .form-row:focus-within { border-color: var(--nothing-red); } /* 🔴 Red Border Focus */
+    .form-row:focus-within { border-color: var(--nothing-red); }
     .form-submit { margin-top: 12px; }
     .btn-submit { width: 100%; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; background: var(--nothing-white); color: var(--nothing-black); padding: 18px; border-radius: 28px; border: none; font-weight: 700; cursor: none; transition: all 0.2s; }
-    .btn-submit:hover { background: var(--nothing-red); color: var(--nothing-white); box-shadow: 0 0 20px rgba(255,0,0,0.4); }
+    .btn-submit:hover { background: var(--nothing-red); color: var(--nothing-white); box-shadow: 0 0 20px rgba(255,0,0,0.5); }
 
     /* ============ FOOTER ============ */
     footer {
       background: var(--nothing-black); padding: 60px 48px;
       display: flex; align-items: center; justify-content: space-between;
-      border-top: 1px dashed var(--nothing-border); flex-wrap: wrap; gap: 24px;
+      border-top: 1px dashed var(--nothing-border); flex-wrap: wrap; gap: 24px; z-index: 2; position: relative;
     }
     .footer-copy { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-gray); }
     .footer-links { display: flex; gap: 32px; }
@@ -243,12 +263,6 @@
     /* ============ ANIMATIONS ============ */
     .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-    /* ============ MOBILE MENU LAYER ============ */
-    .mobile-menu { display: none; position: fixed; inset: 0; background: var(--nothing-black); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-family: var(--font-mono); font-size: 32px; color: var(--nothing-gray); text-decoration: none; transition: color 0.2s; text-transform: uppercase; letter-spacing: -0.02em; }
-    .mobile-menu a:hover { color: var(--nothing-red); }
 
     /* ============ RESPONSIVE MEDIA HOOKS ============ */
     @media (max-width: 900px) {
@@ -268,6 +282,9 @@
   </style>
 </head>
 <body>
+
+<!-- Three.js 3D Viewport Layer -->
+<canvas id="webgl-canvas"></canvas>
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
@@ -300,11 +317,10 @@
 
 <section id="hero">
   <div class="hero-grid"></div>
-  <!-- Interactive Red Cosmic Wave Canvas Layer -->
-  <canvas class="cosmic-canvas" id="cosmicCanvas"></canvas>
 
-  <h1 class="hero-name ndot-header fade-up">
-    GYANENDERAN<span class="accent"><br>THIRUMAL</span>
+  <h1 class="hero-name fade-up">
+    <span class="ndot-header">GYANENDERAN</span><br>
+    <span class="ndot-header ndot-header-red">THIRUMAL</span>
   </h1>
 
   <div class="hero-bottom fade-up">
@@ -323,7 +339,7 @@
   </div>
 </section>
 
-<!-- 🔴 TICKER MARQUEE COMPONENT EXACTLY POSITIONED ABOVE PROFESSIONAL SUMMARY -->
+<!-- TICKER MARQUEE COMPONENT POSITIONED ABOVE PROFESSIONAL SUMMARY -->
 <div class="nothing-ticker-container">
   <div class="nothing-ticker-wrap">
     <div class="ticker-item">Gyanenderan Portfolio OS <span>//</span> Version 2.0</div>
@@ -338,18 +354,18 @@
 </div>
 
 <section id="about">
-  <div class="section-header fade-up">
+  <div class="section-header">
     <span class="section-num">01 — About</span>
-    <h2 class="section-title ndot-header">Professional<br>Summary</h2>
+    <h2 class="section-title"><span class="ndot-header">Professional</span><br><span class="ndot-header">Summary</span></h2>
     <div class="divider"></div>
   </div>
   <div class="about-grid">
-    <div class="about-text fade-up">
+    <div class="about-text">
       <p>Detail-oriented Computer Science student with hands-on exposure to <strong>frontend and backend development</strong> using modern web technologies.</p>
       <p>Currently pursuing my <strong>Bachelor's degree in Computer Science and Engineering</strong> at Sri Sairam Engineering College, Tamil Nadu.</p>
       <p>Strong understanding of databases, backend logic, and software engineering principles. Seeking an opportunity to apply skills as a <strong>Full Stack Developer Intern.</strong></p>
     </div>
-    <div class="about-cards fade-up">
+    <div class="about-cards">
       <div class="about-card">
         <div class="about-card-icon">01</div>
         <h4>Frontend Dev</h4>
@@ -375,12 +391,12 @@
 </section>
 
 <section id="skills">
-  <div class="section-header fade-up">
+  <div class="section-header">
     <span class="section-num">02 — Skills</span>
-    <h2 class="section-title ndot-header">Technical<br>Expertise</h2>
+    <h2 class="section-title"><span class="ndot-header">Technical</span><br><span class="ndot-header">Expertise</span></h2>
     <div class="divider"></div>
   </div>
-  <div class="skills-grid fade-up">
+  <div class="skills-grid">
     <div class="skill-cat">
       <span class="skill-cat-label">Languages</span>
       <h3>Programming</h3>
@@ -449,13 +465,12 @@
 </section>
 
 <section id="projects">
-  <div class="section-header fade-up">
+  <div class="section-header">
     <span class="section-num">03 — Projects</span>
-    <h2 class="section-title ndot-header">Featured<br>Work</h2>
+    <h2 class="section-title"><span class="ndot-header">Featured</span><br><span class="ndot-header">Work</span></h2>
     <div class="divider"></div>
   </div>
-  <div class="projects-list fade-up">
-    <!-- Project 01: EdgeSync -->
+  <div class="projects-list">
     <a href="https://edge-sync-app-theta.vercel.app/" target="_blank" class="project-item">
       <div class="project-num">01</div>
       <div class="project-content">
@@ -472,7 +487,6 @@
       <div class="project-arrow">↗</div>
     </a>
     
-    <!-- Project 02: AIDLEX -->
     <div class="project-item">
       <div class="project-num">02</div>
       <div class="project-content">
@@ -489,7 +503,6 @@
       <div class="project-arrow">↗</div>
     </div>
     
-    <!-- Project 03: Full Stack Web Application -->
     <div class="project-item">
       <div class="project-num">03</div>
       <div class="project-content">
@@ -507,7 +520,6 @@
       <div class="project-arrow">→</div>
     </div>
     
-    <!-- Project 04: NEOASSIST -->
     <div class="project-item">
       <div class="project-num">04</div>
       <div class="project-content">
@@ -527,12 +539,12 @@
 </section>
 
 <section id="education">
-  <div class="section-header fade-up">
+  <div class="section-header">
     <span class="section-num">04 — Education</span>
-    <h2 class="section-title ndot-header">Academic<br>Background</h2>
+    <h2 class="section-title"><span class="ndot-header">Academic</span><br><span class="ndot-header">Background</span></h2>
     <div class="divider"></div>
   </div>
-  <div class="edu-grid fade-up">
+  <div class="edu-grid">
     <div>
       <div class="edu-card" style="margin-bottom:32px">
         <span class="edu-card-label">Current Education</span>
@@ -580,19 +592,19 @@
             <div class="cert-courses">Python For Beginners</div>
           </div>
           <div class="cert-year">2025</div>
-          </li>
+        </li>
       </ul>
     </div>
   </div>
 </section>
 
 <section id="contact">
-  <div class="section-header fade-up">
+  <div class="section-header">
     <span class="section-num">05 — Contact</span>
-    <h2 class="section-title ndot-header">Let's Work<br>Together</h2>
+    <h2 class="section-title"><span class="ndot-header">Let's</span> <span class="ndot-header ndot-header-red">Work</span><br><span class="ndot-header">Together</span></h2>
     <div class="divider"></div>
   </div>
-  <div class="contact-layout fade-up">
+  <div class="contact-layout">
     <div class="contact-info">
       <p>I'm currently seeking opportunities for a Full Stack Developer Internship. Feel free to reach out if you'd like to discuss projects, collaborations, or opportunities.</p>
       <div class="contact-details">
@@ -650,6 +662,121 @@
 </footer>
 
 <script>
+  // registering ScrollTrigger into GSAP Pipeline
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ============ 1. THREE.JS 3D DOT MATRIX ENGINE ============
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl-canvas'), alpha: true, antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  // Build Floating Hardware LED Particle Grid
+  const count = 750;
+  const geometry = new THREE.BufferGeometry();
+  const positions = new Float32Array(count * 3);
+  const colors = new Float32Array(count * 3);
+
+  for(let i = 0; i < count * 3; i += 3) {
+    // Distribute randomly into a spherical volumetric form
+    const u = Math.random();
+    const v = Math.random();
+    const theta = u * 2.0 * Math.PI;
+    const phi = Math.acos(2.0 * v - 1.0);
+    const r = 15 + Math.random() * 10;
+    
+    positions[i] = r * Math.sin(phi) * Math.cos(theta);
+    positions[i+1] = r * Math.sin(phi) * Math.sin(theta);
+    positions[i+2] = r * Math.cos(phi);
+
+    // Color Injection: Balance Red and Monochromatic nodes
+    if (Math.random() > 0.8) {
+      colors[i] = 1.0; colors[i+1] = 0.0; colors[i+2] = 0.0; // Nothing Pure Red
+    } else {
+      colors[i] = 0.5; colors[i+1] = 0.5; colors[i+2] = 0.5; // Tech Grey
+    }
+  }
+
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+  // Round hardware dots simulation material
+  const material = new THREE.PointsMaterial({
+    size: 0.35,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.6,
+    sizeAttenuation: true
+  });
+
+  const particlePoints = new THREE.Points(geometry, material);
+  scene.add(particlePoints);
+  camera.position.z = 30;
+
+  // Interactivity hooks via mouse positions
+  let mouseX = 0, mouseY = 0;
+  document.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX - window.innerWidth / 2) * 0.03;
+    mouseY = (e.clientY - window.innerHeight / 2) * 0.03;
+  });
+
+  function render3DFrame() {
+    requestAnimationFrame(render3DFrame);
+    
+    // Smooth inertial dampening loops
+    particlePoints.rotation.y += 0.002;
+    particlePoints.rotation.x += 0.001;
+    
+    particlePoints.position.x += (mouseX - particlePoints.position.x) * 0.05;
+    particlePoints.position.y += (-mouseY - particlePoints.position.y) * 0.05;
+
+    renderer.render(scene, camera);
+  }
+  render3DFrame();
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  // ============ 2. GSAP STORYTELLING SCROLLTRIGGER LAYER ============
+  // Narrative stagger cascade for sections & hardware grids
+  gsap.utils.toArray('section').forEach((section) => {
+    const header = section.querySelector('.section-header');
+    const items = section.querySelectorAll('.about-card, .skill-cat, .project-item, .edu-card, .cert-item, .form-row');
+
+    if (header) {
+      gsap.fromTo(header, 
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 1, ease: "power4.out",
+          scrollTrigger: { trigger: section, start: "top 75%" }
+        }
+      );
+    }
+
+    if (items.length > 0) {
+      gsap.fromTo(items,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: 0.15,
+          scrollTrigger: { trigger: section, start: "top 65%" }
+        }
+      );
+    }
+    
+    // Dynamic 3D Morph on continuous scroll timelines
+    gsap.to(particlePoints.rotation, {
+      y: "+=1.5",
+      scrollTrigger: {
+        trigger: section,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1
+      }
+    });
+  });
+
   // Cursor Engine
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
@@ -658,13 +785,12 @@
   function animRing() { rx += (mx - rx) * 0.2; ry += (my - ry) * 0.2; ring.style.left = rx - 20 + 'px'; ring.style.top = ry - 20 + 'px'; requestAnimationFrame(animRing); }
   animRing();
   
-  // Glyph Red Glowing Matrix on interactive elements
   document.querySelectorAll('a,button,.project-item').forEach(el => { 
     el.addEventListener('mouseenter', () => { 
       cursor.style.transform = 'scale(2.5)'; 
       ring.style.transform = 'scale(1.3)'; 
       ring.style.borderColor = 'var(--nothing-red)'; 
-      ring.style.boxShadow = '0 0 14px rgba(255, 0, 0, 0.7)';
+      ring.style.boxShadow = '0 0 16px rgba(255, 0, 0, 0.85)';
     }); 
     el.addEventListener('mouseleave', () => { 
       cursor.style.transform = 'scale(1)'; 
@@ -674,55 +800,6 @@
     }); 
   });
 
-  // 🔴 Red Cosmic Fluid Wave Engine (Fine-tuned Canvas Speed & Amplitude)
-  const canvas = document.getElementById('cosmicCanvas');
-  const ctx = canvas.getContext('2d');
-  let width = canvas.width = window.innerWidth;
-  let height = canvas.height = window.innerHeight;
-  
-  window.addEventListener('resize', () => {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-  });
-
-  let points = [];
-  const totalPoints = 8;
-  for(let i = 0; i <= totalPoints; i++) {
-    points.push({
-      x: (width / totalPoints) * i,
-      y: height * 0.55,
-      angle: Math.random() * Math.PI * 2,
-      speed: 0.015 + Math.random() * 0.01
-    });
-  }
-
-  function drawCosmicWaves() {
-    ctx.clearRect(0, 0, width, height);
-    ctx.strokeStyle = 'rgba(255, 0, 0, 0.28)'; // 🔴 Boosted Red Line Transparency
-    ctx.lineWidth = 1.3;
-    ctx.setLineDash([5, 4]);
-    
-    ctx.beginPath();
-    for(let i = 0; i < points.length; i++) {
-      let p = points[i];
-      p.angle += p.speed;
-      let waveOffset = Math.sin(p.angle) * 45;
-      let currentY = p.y + waveOffset;
-      
-      if(i === 0) ctx.moveTo(p.x, currentY);
-      else {
-        let prevP = points[i-1];
-        let prevWaveOffset = Math.sin(prevP.angle) * 45;
-        let xc = (prevP.x + p.x) / 2;
-        let yc = ((prevP.y + prevWaveOffset) + currentY) / 2;
-        ctx.quadraticCurveTo(prevP.x, prevP.y + prevWaveOffset, xc, yc);
-      }
-    }
-    ctx.stroke();
-    requestAnimationFrame(drawCosmicWaves);
-  }
-  drawCosmicWaves();
-
   // Nav scroll
   window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60); });
 
@@ -730,10 +807,6 @@
   document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
   function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
   document.getElementById('mobileMenu').addEventListener('click', e => { if(e.target === e.currentTarget) closeMobile(); });
-
-  // Fade-up observer
-  const observer = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
   // Contact form integrated with EmailJS pipeline
   function sendMail() {
