@@ -18,11 +18,8 @@
       --nothing-dark: #161618;
       --nothing-gray: #8E8E93;
       
-      /* 💧 iOS 26 High-Fidelity Hyper-Realistic Liquid Glass Fluid Specifications */
-      --ios-liquid-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-      --ios-liquid-border: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.03) 100%);
-      --ios-liquid-glow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.2);
-      
+      /* 💧 iOS 26 High-Fidelity Fluid Specs */
+      --ios-liquid-bg: rgba(255, 255, 255, 0.02);
       --font-display: 'Montserrat', sans-serif;
       --font-mono: 'Space Mono', monospace;
       --font-body: 'Inter', sans-serif;
@@ -47,7 +44,7 @@
     ::-webkit-scrollbar-track { background: var(--nothing-black); }
     ::-webkit-scrollbar-thumb { background: var(--nothing-red); border-radius: 10px; }
 
-    /* ============ ⚡ TYPOGRAPHY: MODERN, AGGRESSIVE, BOLD, CAPITALIZED ============ */
+    /* ============ TYPOGRAPHY ============ */
     .ndot-header {
       font-family: var(--font-display);
       font-weight: 900;
@@ -144,43 +141,66 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* ============ 💧 🔴 iOS 26 HIGH-FIDELITY LIQUID GLASSMORPHISM BOXES SYSTEM ============ */
+    /* ============ 💧 🔴 FIXED: iOS 26 SEAMLESS LIQUID GLASS WITH PERFECT CORNER MASKS ============ */
+    /* Pseudo-element boundary mask isolates gradient loop perfectly within rounded radius frames without clipping breaks */
     .about-card, .skill-cat, .edu-card, .cert-item, .form-row {
+      position: relative !important;
       background: var(--ios-liquid-bg) !important;
-      backdrop-filter: blur(40px) saturate(220%) !important;
-      -webkit-backdrop-filter: blur(40px) saturate(220%) !important;
-      border: 1px solid transparent !important;
-      border-image: var(--ios-liquid-border) 1 !important;
-      box-shadow: var(--ios-liquid-glow) !important;
+      backdrop-filter: blur(40px) saturate(230%) !important;
+      -webkit-backdrop-filter: blur(40px) saturate(230%) !important;
       border-radius: 24px !important;
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    .about-card:hover, .skill-cat:hover, .edu-card:hover, .cert-item:hover {
-      border-image: linear-gradient(135deg, var(--nothing-red) 0%, rgba(255,0,0,0.2) 100%) 1 !important;
-      box-shadow: 0 16px 45px 0 rgba(255, 0, 0, 0.18), inset 0 1px 2px 0 rgba(255, 255, 255, 0.3) !important;
-      transform: translateY(-6px) scale(1.01);
+      padding: 36px;
+      overflow: hidden !important;
+      border: 1px solid rgba(255,255,255,0.08) !important;
+      box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.6), inset 0 1px 2px 0 rgba(255,255,255,0.15) !important;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
 
-    /* ABOUT GRID */
+    /* High-fidelity fluid gradient tracer trace line */
+    .about-card::before, .skill-cat::before, .edu-card::before, .cert-item::before, .form-row::before {
+      content: '' !important;
+      position: absolute !important;
+      inset: 0 !important;
+      border-radius: 24px !important;
+      padding: 1.5px !important; /* Thickness of fluid loop border */
+      background: conic-gradient(from var(--grad-angle, 0deg), transparent 60%, var(--nothing-gray) 80%, var(--nothing-white) 90%, var(--nothing-red) 100%) !important;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
+      -webkit-mask-composite: xor !important;
+      mask-composite: exclude !important;
+      pointer-events: none !important;
+      opacity: 0 !important;
+      transition: opacity 0.4s ease !important;
+    }
+
+    /* Hover State Fusions */
+    .about-card:hover, .skill-cat:hover, .edu-card:hover, .cert-item:hover {
+      transform: translateY(-6px) scale(1.01) !important;
+      box-shadow: 0 16px 45px 0 rgba(255, 0, 0, 0.14), inset 0 1px 3px 0 rgba(255,255,255,0.3) !important;
+    }
+    /* Ignite liquid outline flow loop strictly on hover container context */
+    .about-card:hover::before, .skill-cat:hover::before, .edu-card:hover::before, .cert-item:hover::before, .form-row:focus-within::before {
+      opacity: 1 !important;
+    }
+
+    /* ABOUT SPECIFIC OVERFITTING CORRECTIONS */
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
     .about-text p { font-size: 16px; line-height: 1.8; color: var(--nothing-gray); margin-bottom: 24px; font-weight: 300; }
     .about-text p strong { color: var(--nothing-white); font-weight: 500; }
     .about-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .about-card { padding: 36px; position: relative; overflow: hidden; }
     .about-card-icon { font-size: 22px; color: var(--nothing-red); margin-bottom: 16px; font-family: var(--font-mono); font-weight: bold; } 
     .about-card h4 { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nothing-white); margin-bottom: 12px; }
     .about-card p { font-size: 13px; color: var(--nothing-gray); line-height: 1.6; }
 
-    /* SKILLS */
+    /* SKILLS SPECIFIC */
     .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .skill-cat { padding: 44px 36px; }
     .skill-cat-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-red); margin-bottom: 20px; display: block; } 
     .skill-cat h3 { font-family: var(--font-mono); font-size: 20px; font-weight: 400; color: var(--nothing-white); margin-bottom: 24px; letter-spacing: -0.02em; }
     .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .skill-tag { font-family: var(--font-mono); font-size: 11px; padding: 6px 14px; border-radius: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); color: var(--nothing-gray); letter-spacing: 0.05em; transition: all 0.2s; }
     .skill-tag:hover { border-color: var(--nothing-red); color: var(--nothing-white); background: rgba(255, 0, 0, 0.04); }
 
-    /* PROJECTS */
+    /* PROJECTS LIST */
     .projects-list { display: flex; flex-direction: column; gap: 0; }
     .project-item { display: grid; grid-template-columns: 80px 1fr auto; align-items: center; gap: 40px; padding: 44px 16px; border-top: 1px dashed rgba(255,255,255,0.1); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: none; text-decoration: none; border-radius: 12px; }
     .project-item:last-child { border-bottom: 1px dashed rgba(255,255,255,0.1); }
@@ -195,21 +215,20 @@
     .project-tag { font-family: var(--font-mono); font-size: 10px; padding: 4px 12px; border-radius: 10px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); color: var(--nothing-gray); }
     .project-arrow { font-family: var(--font-mono); font-size: 24px; color: var(--nothing-gray); transition: all 0.3s ease; }
 
-    /* EDUCATION */
+    /* EDUCATION ARCHITECTURE */
     .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
-    .edu-card { padding: 48px; position: relative; overflow: hidden; }
-    .edu-card::before { content: ''; position: absolute; top: 24px; right: 24px; width: 6px; height: 6px; background: var(--nothing-red); border-radius: 50%; box-shadow: 0 0 8px 1px var(--nothing-red); }
+    .edu-card::before { content: '' !important; left: 0 !important; top: 0 !important; }
+    .edu-card-marker { position: absolute; top: 24px; right: 24px; width: 6px; height: 6px; background: var(--nothing-red); border-radius: 50%; box-shadow: 0 0 8px 1px var(--nothing-red); }
     .edu-card-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-gray); margin-bottom: 24px; display: block; }
     .edu-card h3 { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--nothing-white); margin-bottom: 12px; }
     .edu-card .institution { font-size: 14px; color: var(--nothing-gray); margin-bottom: 20px; }
     .edu-card .year { font-family: var(--font-mono); font-size: 12px; color: var(--nothing-red); } 
     .cert-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-    .cert-item { padding: 24px; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
     .cert-name { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--nothing-white); margin-bottom: 6px; }
     .cert-courses { font-size: 13px; color: var(--nothing-gray); }
     .cert-year { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-red); white-space: nowrap; } 
 
-    /* CONTACT Form */
+    /* CONTACT CONTEXT */
     .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
     .contact-info p { font-size: 16px; color: var(--nothing-gray); line-height: 1.8; margin-bottom: 48px; }
     .contact-details { display: flex; flex-direction: column; gap: 4px; }
@@ -221,7 +240,6 @@
     .contact-row-value a:hover { color: var(--nothing-red); }
     
     .contact-form { display: flex; flex-direction: column; gap: 12px; }
-    .form-row { position: relative; }
     .form-row input, .form-row textarea {
       width: 100%; background: transparent; border: none; outline: none;
       font-family: var(--font-body); font-size: 14px; color: var(--nothing-white);
@@ -272,6 +290,7 @@
       footer { padding: 40px 24px; }
     }
   </style>
+  <script>CSS.registerProperty({name: '--grad-angle', syntax: '<angle>', inherits: false, initialValue: '0deg'});</script>
 </head>
 <body>
 
@@ -537,12 +556,14 @@
   <div class="edu-grid">
     <div>
       <div class="edu-card" style="margin-bottom:32px">
+        <div class="edu-card-marker"></div>
         <span class="edu-card-label">Current Education</span>
         <h3>Bachelor of Engineering – Computer Science & Engineering</h3>
         <div class="institution">Sri Sairam Engineering College, Tamil Nadu, India</div>
         <div class="year">Expected: May 2028</div>
       </div>
       <div class="edu-card">
+        <div class="edu-card-marker"></div>
         <span class="edu-card-label">Languages</span>
         <h3>Communication</h3>
         <div style="margin-top:16px;display:flex;flex-direction:column;gap:12px">
@@ -822,6 +843,17 @@
     hamburger.classList.remove('active');
     mobileMenu.classList.remove('open');
   }
+
+  // 🔴 NEW: PRO-LEVEL SEAMLESS INTERACTIVE GRADIENT LOOP ANIMATION FOR LIQUID CARDS
+  // Executes dynamic infinite circular gradient loops strictly utilizing CSS registered properties via GSAP engine
+  gsap.utils.toArray('.about-card, .skill-cat, .edu-card, .cert-item, .form-row').forEach(card => {
+    gsap.to(card, {
+      '--grad-angle': '360deg',
+      duration: 3,
+      repeat: -1,
+      ease: "none"
+    });
+  });
 
   // Contact form integrated with EmailJS pipeline
   function sendMail() {
