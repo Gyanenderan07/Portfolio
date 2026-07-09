@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Gyanenderan T – Full Stack Developer Portfolio" />
   <title>Gyanenderan T – Portfolio</title>
-  <!-- Nothing OS Core Font Systems -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   
-  <!-- GSAP & Three.js Framework CDNs -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -32,8 +30,11 @@
     html { scroll-behavior: smooth; background: var(--nothing-black); }
     body { font-family: var(--font-body); background: var(--nothing-black); color: var(--nothing-white); overflow-x: hidden; cursor: none; -webkit-font-smoothing: antialiased; }
 
-    /* WebGL Canvas Background */
-    #webgl-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; pointer-events: none; opacity: 0.6; }
+    /* 🔴 THREE.JS CANVAS CONTAINER LAYER */
+    #three-canvas-container {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: -1; pointer-events: none; background: var(--nothing-black);
+    }
 
     /* Custom Matrix Dots Cursor Subsystem */
     .cursor { width: 6px; height: 6px; background: var(--nothing-red); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; }
@@ -49,7 +50,7 @@
     ::-webkit-scrollbar-track { background: var(--nothing-black); }
     ::-webkit-scrollbar-thumb { background: var(--nothing-red); border-radius: 10px; }
 
-    /* ============ 🔴 TRUE ACCURATE NOTHING DOT MATRIX TYPOGRAPHY ENGINE ============ */
+    /* ============ NOTHING DOT MATRIX TYPOGRAPHY ENGINE ============ */
     .ndot-header {
       font-family: var(--font-mono);
       font-weight: 700;
@@ -111,13 +112,13 @@
     /* ============ HERO ============ */
     #hero {
       min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 0 48px 100px; position: relative; overflow: hidden; z-index: 2;
+      padding: 0 48px 100px; position: relative; overflow: hidden;
     }
     .hero-grid {
       position: absolute; inset: 0;
       background-image: radial-gradient(var(--nothing-border) 1px, transparent 1px);
       background-size: 24px 24px;
-      opacity: 0.7;
+      opacity: 0.4;
     }
     .hero-name { font-size: clamp(38px, 7.5vw, 90px); color: var(--nothing-white); position: relative; z-index: 2; margin-bottom: 20px; font-weight: 700; line-height: 1.2; word-wrap: break-word; }
     .hero-bottom { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 40px; flex-wrap: wrap; gap: 32px; position: relative; z-index: 2; }
@@ -133,7 +134,7 @@
     .btn-outline:hover { border-color: var(--nothing-red); color: var(--nothing-red); background: rgba(255, 0, 0, 0.03); }
 
     /* ============ SECTION CONFIGURATIONS ============ */
-    section { padding: 140px 48px; border-bottom: 1px dashed var(--nothing-border); position: relative; z-index: 2; }
+    section { padding: 140px 48px; border-bottom: 1px dashed var(--nothing-border); position: relative; }
     .section-header { margin-bottom: 80px; }
     .section-num { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-red); letter-spacing: 0.2em; margin-bottom: 16px; display: block; }
     .section-title { font-size: clamp(32px, 5vw, 56px); margin-bottom: 8px; }
@@ -185,8 +186,8 @@
     /* ============ PROJECTS ============ */
     #projects { background: transparent; }
     .projects-list { display: flex; flex-direction: column; gap: 0; }
-    .project-item { display: grid; grid-template-columns: 80px 1fr auto; align-items: center; gap: 40px; padding: 44px 16px; border-top: 1px dashed var(--nothing-border); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); cursor: none; text-decoration: none; border-radius: 12px; }
-    .project-item:last-child { border-bottom: 1px dashed var(--nothing-border); }
+    .project-item { display: grid; grid-template-columns: 80px 1fr auto; align-items: center; gap: 40px; padding: 44px 16px; border-top: 1px solid var(--nothing-border); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); cursor: none; text-decoration: none; border-radius: 12px; }
+    .project-item:last-child { border-bottom: 1px solid var(--nothing-border); }
     .project-item:hover { background: var(--nothing-dark); border-top-color: var(--nothing-red); border-bottom-color: var(--nothing-red); padding-left: 24px; padding-right: 24px; }
     .project-item:hover .project-num { color: var(--nothing-red); }
     .project-item:hover .project-arrow { color: var(--nothing-red); transform: translate(6px, -6px); }
@@ -249,7 +250,7 @@
     footer {
       background: var(--nothing-black); padding: 60px 48px;
       display: flex; align-items: center; justify-content: space-between;
-      border-top: 1px dashed var(--nothing-border); flex-wrap: wrap; gap: 24px; z-index: 2; position: relative;
+      border-top: 1px dashed var(--nothing-border); flex-wrap: wrap; gap: 24px;
     }
     .footer-copy { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-gray); }
     .footer-links { display: flex; gap: 32px; }
@@ -260,9 +261,11 @@
     .back-top svg { width: 14px; height: 14px; fill: var(--nothing-white); }
     .back-top:hover svg { fill: var(--nothing-red); }
 
-    /* ============ ANIMATIONS ============ */
-    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    /* ============ MOBILE MENU LAYER ============ */
+    .mobile-menu { display: none; position: fixed; inset: 0; background: var(--nothing-black); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: var(--font-mono); font-size: 32px; color: var(--nothing-gray); text-decoration: none; transition: color 0.2s; text-transform: uppercase; letter-spacing: -0.02em; }
+    .mobile-menu a:hover { color: var(--nothing-red); }
 
     /* ============ RESPONSIVE MEDIA HOOKS ============ */
     @media (max-width: 900px) {
@@ -283,8 +286,7 @@
 </head>
 <body>
 
-<!-- Three.js 3D Viewport Layer -->
-<canvas id="webgl-canvas"></canvas>
+<div id="three-canvas-container"></div>
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
@@ -318,12 +320,12 @@
 <section id="hero">
   <div class="hero-grid"></div>
 
-  <h1 class="hero-name fade-up">
+  <h1 class="hero-name fade-up-target">
     <span class="ndot-header">GYANENDERAN</span><br>
     <span class="ndot-header ndot-header-red">THIRUMAL</span>
   </h1>
 
-  <div class="hero-bottom fade-up">
+  <div class="hero-bottom fade-up-target">
     <div class="hero-title">
       <strong>Full Stack Developer</strong>
       Building with modern web technologies &<br>full-stack development
@@ -339,7 +341,6 @@
   </div>
 </section>
 
-<!-- TICKER MARQUEE COMPONENT POSITIONED ABOVE PROFESSIONAL SUMMARY -->
 <div class="nothing-ticker-container">
   <div class="nothing-ticker-wrap">
     <div class="ticker-item">Gyanenderan Portfolio OS <span>//</span> Version 2.0</div>
@@ -353,7 +354,7 @@
   </div>
 </div>
 
-<section id="about">
+<section id="about" class="scroll-section">
   <div class="section-header">
     <span class="section-num">01 — About</span>
     <h2 class="section-title"><span class="ndot-header">Professional</span><br><span class="ndot-header">Summary</span></h2>
@@ -390,7 +391,7 @@
   </div>
 </section>
 
-<section id="skills">
+<section id="skills" class="scroll-section">
   <div class="section-header">
     <span class="section-num">02 — Skills</span>
     <h2 class="section-title"><span class="ndot-header">Technical</span><br><span class="ndot-header">Expertise</span></h2>
@@ -464,7 +465,7 @@
   </div>
 </section>
 
-<section id="projects">
+<section id="projects" class="scroll-section">
   <div class="section-header">
     <span class="section-num">03 — Projects</span>
     <h2 class="section-title"><span class="ndot-header">Featured</span><br><span class="ndot-header">Work</span></h2>
@@ -538,7 +539,7 @@
   </div>
 </section>
 
-<section id="education">
+<section id="education" class="scroll-section">
   <div class="section-header">
     <span class="section-num">04 — Education</span>
     <h2 class="section-title"><span class="ndot-header">Academic</span><br><span class="ndot-header">Background</span></h2>
@@ -598,7 +599,7 @@
   </div>
 </section>
 
-<section id="contact">
+<section id="contact" class="scroll-section">
   <div class="section-header">
     <span class="section-num">05 — Contact</span>
     <h2 class="section-title"><span class="ndot-header">Let's</span> <span class="ndot-header ndot-header-red">Work</span><br><span class="ndot-header">Together</span></h2>
@@ -662,122 +663,10 @@
 </footer>
 
 <script>
-  // registering ScrollTrigger into GSAP Pipeline
+  // Register GSAP ScrollTrigger
   gsap.registerPlugin(ScrollTrigger);
 
-  // ============ 1. THREE.JS 3D DOT MATRIX ENGINE ============
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl-canvas'), alpha: true, antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-  // Build Floating Hardware LED Particle Grid
-  const count = 750;
-  const geometry = new THREE.BufferGeometry();
-  const positions = new Float32Array(count * 3);
-  const colors = new Float32Array(count * 3);
-
-  for(let i = 0; i < count * 3; i += 3) {
-    // Distribute randomly into a spherical volumetric form
-    const u = Math.random();
-    const v = Math.random();
-    const theta = u * 2.0 * Math.PI;
-    const phi = Math.acos(2.0 * v - 1.0);
-    const r = 15 + Math.random() * 10;
-    
-    positions[i] = r * Math.sin(phi) * Math.cos(theta);
-    positions[i+1] = r * Math.sin(phi) * Math.sin(theta);
-    positions[i+2] = r * Math.cos(phi);
-
-    // Color Injection: Balance Red and Monochromatic nodes
-    if (Math.random() > 0.8) {
-      colors[i] = 1.0; colors[i+1] = 0.0; colors[i+2] = 0.0; // Nothing Pure Red
-    } else {
-      colors[i] = 0.5; colors[i+1] = 0.5; colors[i+2] = 0.5; // Tech Grey
-    }
-  }
-
-  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-  // Round hardware dots simulation material
-  const material = new THREE.PointsMaterial({
-    size: 0.35,
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.6,
-    sizeAttenuation: true
-  });
-
-  const particlePoints = new THREE.Points(geometry, material);
-  scene.add(particlePoints);
-  camera.position.z = 30;
-
-  // Interactivity hooks via mouse positions
-  let mouseX = 0, mouseY = 0;
-  document.addEventListener('mousemove', (e) => {
-    mouseX = (e.clientX - window.innerWidth / 2) * 0.03;
-    mouseY = (e.clientY - window.innerHeight / 2) * 0.03;
-  });
-
-  function render3DFrame() {
-    requestAnimationFrame(render3DFrame);
-    
-    // Smooth inertial dampening loops
-    particlePoints.rotation.y += 0.002;
-    particlePoints.rotation.x += 0.001;
-    
-    particlePoints.position.x += (mouseX - particlePoints.position.x) * 0.05;
-    particlePoints.position.y += (-mouseY - particlePoints.position.y) * 0.05;
-
-    renderer.render(scene, camera);
-  }
-  render3DFrame();
-
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-
-  // ============ 2. GSAP STORYTELLING SCROLLTRIGGER LAYER ============
-  // Narrative stagger cascade for sections & hardware grids
-  gsap.utils.toArray('section').forEach((section) => {
-    const header = section.querySelector('.section-header');
-    const items = section.querySelectorAll('.about-card, .skill-cat, .project-item, .edu-card, .cert-item, .form-row');
-
-    if (header) {
-      gsap.fromTo(header, 
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 1, ease: "power4.out",
-          scrollTrigger: { trigger: section, start: "top 75%" }
-        }
-      );
-    }
-
-    if (items.length > 0) {
-      gsap.fromTo(items,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: 0.15,
-          scrollTrigger: { trigger: section, start: "top 65%" }
-        }
-      );
-    }
-    
-    // Dynamic 3D Morph on continuous scroll timelines
-    gsap.to(particlePoints.rotation, {
-      y: "+=1.5",
-      scrollTrigger: {
-        trigger: section,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 1
-      }
-    });
-  });
-
-  // Cursor Engine
+  // 1. Cursor Engine Setup
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
   let mx = 0, my = 0, rx = 0, ry = 0;
@@ -785,7 +674,7 @@
   function animRing() { rx += (mx - rx) * 0.2; ry += (my - ry) * 0.2; ring.style.left = rx - 20 + 'px'; ring.style.top = ry - 20 + 'px'; requestAnimationFrame(animRing); }
   animRing();
   
-  document.querySelectorAll('a,button,.project-item').forEach(el => { 
+  document.querySelectorAll('a,button,.project-item,.btn-primary,.btn-outline').forEach(el => { 
     el.addEventListener('mouseenter', () => { 
       cursor.style.transform = 'scale(2.5)'; 
       ring.style.transform = 'scale(1.3)'; 
@@ -800,15 +689,152 @@
     }); 
   });
 
-  // Nav scroll
+  // 2. Three.js Cosmic Matrix Particles Scene Setup
+  const container = document.getElementById('three-canvas-container');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 30;
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  container.appendChild(renderer.domElement);
+
+  // Re-generate Dotted Grid Array via Three.js Points Material
+  const particleCount = 700;
+  const geometry = new THREE.BufferGeometry();
+  const positions = new Float32Array(particleCount * 3);
+  const colors = new Float32Array(particleCount * 3);
+
+  for (let i = 0; i < particleCount * 3; i += 3) {
+    // Generate scattered network constellation topology
+    positions[i] = (Math.random() - 0.5) * 80;
+    positions[i + 1] = (Math.random() - 0.5) * 60;
+    positions[i + 2] = (Math.random() - 0.5) * 40;
+
+    // Mix white/grey nodes with rare signature red emitters
+    if (Math.random() > 0.88) {
+      colors[i] = 1.0; colors[i + 1] = 0.0; colors[i + 2] = 0.0; // Pure Red
+    } else {
+      colors[i] = 0.4; colors[i + 1] = 0.4; colors[i + 2] = 0.4; // Nothing Dull Grey
+    }
+  }
+
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+  // Circular Dot Texture representation using Canvas fallback inside PointMaterial
+  const pMaterial = new THREE.PointsMaterial({
+    size: 0.35,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.7,
+    sizeAttenuation: true
+  });
+
+  const particleSystem = new THREE.Points(geometry, pMaterial);
+  scene.add(particleSystem);
+
+  // Mouse Parallax Track inside Three.js
+  let targetX = 0, targetY = 0;
+  document.addEventListener('mousemove', (e) => {
+    targetX = (e.clientX - window.innerWidth / 2) * 0.015;
+    targetY = (e.clientY - window.innerHeight / 2) * 0.015;
+  });
+
+  // Render Loop
+  function animateThree() {
+    requestAnimationFrame(animateThree);
+    
+    // Slow structural drift
+    particleSystem.rotation.y += 0.0008;
+    
+    // Interactive mouse inertia feedback
+    particleSystem.rotation.x += (targetY * 0.05 - particleSystem.rotation.x) * 0.05;
+    particleSystem.rotation.y += (targetX * 0.05 - particleSystem.rotation.y) * 0.05;
+
+    renderer.render(scene, camera);
+  }
+  animateThree();
+
+  // Resize Handler
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  // 3. GSAP ScrollTrigger 3D Storytelling Layout Animations
+  // Hero load animations
+  gsap.from("#hero .hero-name .ndot-header", {
+    duration: 1.2,
+    y: 60,
+    opacity: 0,
+    stagger: 0.2,
+    ease: "power4.out"
+  });
+
+  gsap.from("#hero .hero-bottom", {
+    duration: 1.5,
+    opacity: 0,
+    y: 30,
+    delay: 0.6,
+    ease: "power3.out"
+  });
+
+  // Connect Three.js camera depth translation dynamically to page scroll metrics
+  gsap.to(camera.position, {
+    z: 15,
+    scrollTrigger: {
+      trigger: "body",
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 1
+    }
+  });
+
+  // Core Section Headers Storyline Reveal
+  document.querySelectorAll('section').forEach((section) => {
+    const header = section.querySelector('.section-header');
+    const contentElements = section.querySelectorAll('.about-grid, .skills-grid, .projects-list, .edu-grid, .contact-layout');
+
+    if (header) {
+      gsap.from(header, {
+        opacity: 0,
+        x: -40,
+        duration: 1,
+        scrollTrigger: {
+          trigger: section,
+          start: "top 75%",
+          toggleActions: "play none none none"
+        }
+      });
+    }
+
+    if (contentElements.length > 0) {
+      gsap.from(contentElements, {
+        opacity: 0,
+        y: 50,
+        duration: 1.2,
+        stagger: 0.15,
+        scrollTrigger: {
+          trigger: section,
+          start: "top 65%",
+          toggleActions: "play none none none"
+        }
+      });
+    }
+  });
+
+  // Nav Scroll Style Toggle
   window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60); });
 
-  // Mobile menu
+  // Mobile menu links toggle
   document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
   function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
   document.getElementById('mobileMenu').addEventListener('click', e => { if(e.target === e.currentTarget) closeMobile(); });
 
-  // Contact form integrated with EmailJS pipeline
+  // Contact form pipeline connected with EmailJS
   function sendMail() {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
