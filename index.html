@@ -12,11 +12,15 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.css" />
 
   <style>
-    /* ============ NOTHING TECH NDOT-57 CORE FONT INTERFACE ============ */
+    /* ============ NOTHING TECH NDOT-57 CORE FONT INTERFACE (UPDATED FROM SCREENSHOT) ============ */
     @font-face {
       font-family: 'NDot-57';
-      src: url('fonts/NDot-57.woff2') format('woff2'),
-           url('fonts/NDot-57.ttf') format('truetype');
+      src: url("https://db.onlinewebfonts.com/t/d7a74ed36ff0603a3e41b6da32c47f03.eot");
+      src: url("https://db.onlinewebfonts.com/t/d7a74ed36ff0603a3e41b6da32c47f03.eot?#iefix") format("embedded-opentype"),
+           url("https://db.onlinewebfonts.com/t/d7a74ed36ff0603a3e41b6da32c47f03.woff2") format("woff2"),
+           url("https://db.onlinewebfonts.com/t/d7a74ed36ff0603a3e41b6da32c47f03.woff") format("woff"),
+           url("https://db.onlinewebfonts.com/t/d7a74ed36ff0603a3e41b6da32c47f03.ttf") format("truetype"),
+           url("https://db.onlinewebfonts.com/t/d7a74ed36ff0603a3e41b6da32c47f03.svg#Ndot 57 Aligned") format("svg");
       font-weight: 700;
       font-style: normal;
       font-display: swap;
@@ -194,7 +198,7 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* ============ SPECULATIVE iOS 26 ULTRA-COMPACT LIQUID GLASS INTERACTION LAYER ============ */
+    /* ============ IMMERSIVE GLASS INTERACTION LAYER ============ */
     .about-card, .skill-cat, .edu-card, .cert-item, .form-row {
       position: relative !important;
       background: var(--ios-liquid-bg) !important;
@@ -210,7 +214,6 @@
       will-change: transform, box-shadow;
     }
 
-    /* Edge Refraction Prismatic Simulation Tracer */
     .about-card::before, .skill-cat::before, .edu-card::before, .cert-item::before, .form-row::before {
       content: '' !important;
       position: absolute !important;
@@ -309,7 +312,7 @@
     .btn-submit { width: 100%; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; background: var(--nothing-white); color: var(--nothing-black); padding: 18px; border-radius: 28px; border: none; font-weight: 700; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
     .btn-submit:hover { background: var(--nothing-red); color: var(--nothing-white); box-shadow: 0 0 25px rgba(255,0,0,0.45); }
 
-    /* ============ BLACK FRIDAY LAYOUT ARCHITECTURE ============ */
+    /* ============ FOOTER ARCHITECTURE ============ */
     footer {
       background: var(--nothing-black); padding: 60px clamp(24px, 5vw, 48px);
       display: flex; align-items: center; justify-content: space-between;
@@ -324,7 +327,7 @@
     .back-top svg { width: 14px; height: 14px; fill: var(--nothing-white); transition: fill 0.3s; }
     .back-top:hover svg { fill: var(--nothing-red); }
 
-    /* ============ IMMERSIVE RESPONSIVE COMPACT LAYOUT QUERIES ============ */
+    /* ============ MOBILE MEDIA ARCHITECTURE ============ */
     .mobile-menu { display: flex; position: fixed; inset: 0; background: rgba(11,11,12,0.98); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 32px; transform: translateY(-100%); transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
     .mobile-menu.open { transform: translateY(0); }
     .mobile-menu a { font-family: var(--font-mono); font-size: 24px; color: var(--nothing-gray); text-decoration: none; transition: color 0.3s; text-transform: uppercase; letter-spacing: 0.05em; }
@@ -335,7 +338,6 @@
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
       
-      /* Reduced massive empty top gap by lifting hero text closer to center */
       #hero {
         justify-content: center;
         padding-top: 100px;
@@ -726,7 +728,7 @@
 </section>
 
 <footer>
-  <div class="footer-copy">© 2025 Gyanenderan T. All rights reserved.</div>
+  <div class="footer-copy">© 2026 Gyanenderan T. All rights reserved.</div>
   <div class="footer-links">
     <a href="https://www.linkedin.com/in/gyanenderan-thirumal-744246328" target="_blank">LinkedIn</a>
     <a href="mailto:gyanrea7m@gmail.com">Email</a>
@@ -743,7 +745,6 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
-  // Initialize EmailJS Engine securely
   (function() {
     if(typeof emailjs !== 'undefined') {
       emailjs.init("RKc2DzfH-184ZHuQv");
@@ -752,7 +753,6 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // ============ LENIS HIGH-REFRESH RATE SMOOTH SCROLL ARCHITECTURE ============
   const lenisInstance = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -777,7 +777,6 @@
   });
   gsap.ticker.lagSmoothing(0);
 
-  // ============ HARDWARE ACCELERATED INTERACTIVE ADAPTIVE CURSOR ============
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
   let mx = 0, my = 0, rx = 0, ry = 0;
@@ -813,7 +812,6 @@
     }); 
   });
 
-  // ============ 144FPS WEBGL MOTION GRAPHICS & CUSTOM LIQUID GLASS ENGINE ============
   const container = document.getElementById('webgl-canvas-container');
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -823,7 +821,6 @@
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   container.appendChild(renderer.domElement);
 
-  // Dynamic particle scaling for performance budgets
   const isMobile = window.innerWidth < 768;
   const count = isMobile ? 1200 : 3500;
   
@@ -872,7 +869,6 @@
   scene.add(particleMesh);
   camera.position.z = 22;
 
-  // Custom Liquid Glass Distorting Mesh Layer
   const glassGeo = new THREE.PlaneGeometry(35, 35, 32, 32);
   const glassMat = new THREE.MeshBasicMaterial({
     color: 0xffffff,
@@ -896,7 +892,6 @@
   const posArray = geometry.attributes.position.array;
   let isRenderActive = true;
 
-  // Render loop freeze using Intersection Observer optimization targets
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       isRenderActive = entry.isIntersecting;
@@ -908,7 +903,6 @@
     requestAnimationFrame(tick);
     if (!isRenderActive) return;
 
-    // Strict clock delta time processing for frame independence (144Hz synchronized)
     const delta = clock.getDelta();
     const elapsedTime = clock.getElapsedTime();
     
@@ -940,7 +934,6 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
-  // ============ ADVANCED GSAP SCROLL STORYTELLING LINKAGES ============
   gsap.to(particleMesh.position, {
     scrollTrigger: { trigger: "#about", start: "top bottom", end: "bottom top", scrub: 1.2 },
     z: 8, y: -5, x: -3, ease: "power2.out"
@@ -954,7 +947,6 @@
     z: 3, y: 0, x: -4, ease: "power2.out"
   });
 
-  // Structural dynamic panel reveals
   gsap.utils.toArray('section').forEach(section => {
     const elements = section.querySelectorAll('.section-header, .about-grid, .skills-grid, .projects-list, .edu-grid, .contact-layout');
     gsap.from(elements, {
@@ -963,12 +955,10 @@
     });
   });
 
-  // Navbar dynamic scroll state toggle
   window.addEventListener('scroll', () => { 
     document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40); 
   });
 
-  // Mobile Menu Layout Toggles
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
 
@@ -982,7 +972,6 @@
     mobileMenu.classList.remove('open');
   }
 
-  // Infinite liquid glass tracer loop angle driver engine
   gsap.utils.toArray('.about-card, .skill-cat, .edu-card, .cert-item, .form-row').forEach(card => {
     gsap.to(card, {
       '--grad-angle': '360deg',
@@ -992,7 +981,6 @@
     });
   });
 
-  // Pipeline communication implementation handler
   function sendMail() {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
@@ -1033,13 +1021,12 @@
           submitBtn.disabled = false;
         });
     } else {
-      alert('Email service is initialization ready. Pipeline context simulated.');
+      alert('Email service is initialization ready.');
       submitBtn.innerText = originalText;
       submitBtn.disabled = false;
     }
   }
 
-  // Proper memory allocation garbage collection system definitions
   window.addEventListener('beforeunload', () => {
     if(geometry) geometry.dispose();
     if(material) material.dispose();
