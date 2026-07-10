@@ -99,7 +99,7 @@
     .mono { font-family: var(--font-mono); }
     .label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-gray); }
 
-    /* ============ CURVY ULTRA-SMOOTH CAPSULE NAV ARCHITECTURE ============ */
+    /* ============ CURVY NAV ARCHITECTURE ============ */
     nav {
       position: fixed; 
       top: 16px; 
@@ -112,7 +112,7 @@
       align-items: center; 
       justify-content: space-between;
       padding: 14px clamp(20px, 4vw, 40px);
-      border-radius: 40px; /* Fully Curvy Capsule Edges */
+      border-radius: 40px; 
       background: rgba(11, 11, 12, 0.2);
       border: 1px solid rgba(255, 255, 255, 0.02);
       backdrop-filter: blur(0px);
@@ -159,7 +159,7 @@
     /* ============ FLUID HERO CONFIGURATION ============ */
     #hero {
       min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: flex-end;
-      padding: clamp(100px, 15vh, 180px) clamp(24px, 5vw, 48px) clamp(40px, 8vh, 100px); position: relative; overflow: hidden; z-index: 2;
+      padding: clamp(120px, 18vh, 220px) clamp(24px, 5vw, 48px) clamp(40px, 8vh, 100px); position: relative; overflow: hidden; z-index: 2;
     }
     .hero-grid {
       position: absolute; inset: 0;
@@ -168,8 +168,17 @@
       opacity: 0.6;
       pointer-events: none;
     }
-    /* ENHANCED RESPONSIVE HERO TITLE FLUID SIZE */
-    .hero-name { font-size: clamp(38px, 8.5vw, 120px); line-height: 0.95; color: var(--nothing-white); position: relative; z-index: 2; margin-bottom: 24px; word-break: break-word; }
+    
+    /* ============ IMMERSIVE RESPONSIVE NAME SCALE (OPTIMIZED) ============ */
+    .hero-name { 
+      font-size: clamp(48px, 11vw, 150px); 
+      line-height: 0.90; 
+      color: var(--nothing-white); 
+      position: relative; 
+      z-index: 2; 
+      margin-bottom: 24px; 
+      word-break: break-word; 
+    }
     .hero-name .accent { color: var(--nothing-red); } 
     .hero-bottom { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 48px; flex-wrap: wrap; gap: 32px; position: relative; z-index: 2; }
     .hero-title { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--nothing-gray); max-width: 420px; line-height: 1.8; }
@@ -188,7 +197,6 @@
     .section-header { margin-bottom: clamp(40px, 8vw, 80px); }
     .section-num { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-red); letter-spacing: 0.2em; margin-bottom: 16px; display: block; }
     
-    /* ENHANCED SECTION HEADINGS FONT SIZE - ULTRA RESPONSIVE GRID PROFILE */
     .section-title { font-size: clamp(34px, 6.5vw, 76px); color: var(--nothing-white); line-height: 1.05; }
     .divider { width: 35px; height: 2px; background: var(--nothing-red); margin-top: 24px; } 
 
@@ -210,7 +218,7 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* ============ IMMERSIVE GLASS LAYER INTEGRITY ============ */
+    /* ============ CARD STYLING LAYER ============ */
     .about-card, .skill-cat, .edu-card, .cert-item, .form-row {
       position: relative !important;
       background: var(--ios-liquid-bg) !important;
@@ -261,7 +269,7 @@
     .about-card h4 { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nothing-white); margin-bottom: 12px; }
     .about-card p { font-size: 13px; color: var(--nothing-gray); line-height: 1.6; }
 
-    /* SKILLS GRID CORE CONFIG */
+    /* SKILLS GRID */
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
     .skill-cat-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-red); margin-bottom: 20px; display: block; } 
     .skill-cat h3 { font-family: var(--font-mono); font-size: 20px; font-weight: 400; color: var(--nothing-white); margin-bottom: 24px; letter-spacing: -0.02em; }
@@ -286,7 +294,6 @@
 
     /* ACADEMIC INFRASTRUCTURE */
     .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 80px); }
-    .edu-card::before { content: '' !important; left: 0 !important; top: 0 !important; }
     .edu-card-marker { position: absolute; top: 24px; right: 24px; width: 6px; height: 6px; background: var(--nothing-red); border-radius: 50%; box-shadow: 0 0 10px 2px var(--nothing-red); }
     .edu-card-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nothing-gray); margin-bottom: 24px; display: block; }
     .edu-card h3 { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--nothing-white); margin-bottom: 12px; }
@@ -297,7 +304,7 @@
     .cert-courses { font-size: 13px; color: var(--nothing-gray); }
     .cert-year { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-red); white-space: nowrap; } 
 
-    /* CONTACT INTEGRITY LAYER */
+    /* CONTACT LAYOUT */
     .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 80px); align-items: start; }
     .contact-info p { font-size: 16px; color: var(--nothing-gray); line-height: 1.8; margin-bottom: 48px; }
     .contact-details { display: flex; flex-direction: column; gap: 4px; }
@@ -332,7 +339,7 @@
     }
     .footer-copy { font-family: var(--font-mono); font-size: 11px; color: var(--nothing-gray); }
     .footer-links { display: flex; gap: 32px; }
-    .footer-links a { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nothing-gray); text-decoration: none; transition: color 0.25s; }
+    .footer-links a { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nothing-gray); text-decoration: none; transition: color 0.25; }
     .footer-links a:hover { color: var(--nothing-red); }
     .back-top { width: 44px; height: 44px; background: var(--nothing-dark); border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.25s ease; }
     .back-top:hover { border-color: var(--nothing-red); background: rgba(255, 0, 0, 0.06); }
@@ -352,7 +359,7 @@
       
       #hero {
         justify-content: center;
-        padding-top: 120px;
+        padding-top: 140px;
         padding-bottom: 60px;
       }
       .hero-bottom { margin-top: 32px; }
@@ -404,6 +411,7 @@
 <section id="hero">
   <div class="hero-grid"></div>
 
+  <!-- ULTRA-RESPONSIVE OPTIMIZED HIGH FONT VIEWPORT HEADER -->
   <h1 class="hero-name ndot-header fade-up">
     GYANENDERAN<span class="accent"><br>THIRUMAL</span>
   </h1>
@@ -762,7 +770,6 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
-  /* ============ HIGH INTERPOLATION ACCELERATED SCROLL SYSTEM ============ */
   const lenisInstance = new Lenis({
     duration: 1.0, 
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -786,7 +793,6 @@
   });
   gsap.ticker.lagSmoothing(0);
 
-  /* CURSOR SUBSYSTEM EXECUTIONS */
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
   let mx = 0, my = 0, rx = 0, ry = 0;
@@ -822,15 +828,13 @@
     }); 
   });
 
-  /* ============ ULTRA HIGH FPS-TUNED WEBGL BACKEND ============ */
   const container = document.getElementById('webgl-canvas-container');
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
   
-  // PowerPreference optimized configuration
   const renderer = new THREE.WebGLRenderer({ 
     alpha: true, 
-    antialias: false, // Performance improvement for high display rate
+    antialias: false, 
     powerPreference: "high-performance",
     precision: "mediump"
   });
@@ -840,13 +844,12 @@
   container.appendChild(renderer.domElement);
 
   const isMobile = window.innerWidth < 768;
-  const count = isMobile ? 800 : 2500; // Recalibrated limits to prevent GPU latency
+  const count = isMobile ? 800 : 2500; 
   
   const geometry = new THREE.BufferGeometry();
   const positions = new Float32Array(count * 3);
   const colors = new Float32Array(count * 3);
 
-  // High performance pre-calculated math generation
   for(let i = 0; i < count * 3; i += 3) {
     positions[i] = (Math.random() - 0.5) * 55;
     positions[i+1] = (Math.random() - 0.5) * 55;
@@ -900,20 +903,17 @@
   const posArray = geometry.attributes.position.array;
   let isRenderActive = true;
 
-  // Smart Visibility Check to skip computations when out of sight
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => { isRenderActive = entry.isIntersecting; });
   }, { threshold: 0.001 });
   observer.observe(document.body);
 
-  /* ============ JITTER-FREE MATRIX TICK LOOP (200FPS+ TARGET) ============ */
   function tick() {
     requestAnimationFrame(tick);
     if (!isRenderActive) return;
 
     const elapsedTime = clock.getElapsedTime();
     
-    // Multiplied steps optimized inside simple direct loops
     const wave1 = elapsedTime * 0.8;
     const wave2 = elapsedTime * 0.5;
     for (let i = 0; i < count; i++) {
@@ -939,7 +939,6 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
-  /* GSAP ACCELERATION SCRUB TIMINGS */
   gsap.to(particleMesh.position, {
     scrollTrigger: { trigger: "#about", start: "top bottom", end: "bottom top", scrub: 1.0 },
     z: 7, y: -4, x: -2, ease: "none"
