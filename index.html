@@ -34,8 +34,8 @@
       --nothing-white: #F5F5F7;
       --nothing-black: #0B0B0C;
       --nothing-dark: #161618;
-      --nothing-gray: #A1A1AA; /* Increased contrast from 8E8E93 */
-      --nothing-glass: rgba(22, 22, 24, 0.65); /* Richer glass base opacity */
+      --nothing-gray: #A1A1AA;
+      --nothing-glass: rgba(22, 22, 24, 0.65);
       
       --font-display: 'NDot-57', 'Montserrat', sans-serif;
       --font-mono: 'Space Mono', monospace;
@@ -110,10 +110,9 @@
       display: flex; 
       align-items: center; 
       justify-content: space-between;
-      padding: 16px clamp(20px, 4vw, 40px);
+      padding: 10px clamp(20px, 4vw, 40px); /* Reduced padding to make it sleek */
       border-radius: 40px; 
       
-      /* Active Liquid Glass UI dynamically applied by default */
       background: var(--nothing-glass);
       border: 1px solid rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(24px) saturate(180%);
@@ -122,13 +121,15 @@
       
       transition: background 0.4s cubic-bezier(0.215, 0.610, 0.355, 1), 
                   border-color 0.4s cubic-bezier(0.215, 0.610, 0.355, 1), 
-                  box-shadow 0.4s cubic-bezier(0.215, 0.610, 0.355, 1);
+                  box-shadow 0.4s cubic-bezier(0.215, 0.610, 0.355, 1),
+                  padding 0.3s ease;
       will-change: transform, background, backdrop-filter;
     }
     nav.scrolled { 
       background: rgba(11, 11, 12, 0.85); 
       border-color: rgba(255, 255, 255, 0.15); 
       box-shadow: 0 16px 48px -12px rgba(0, 0, 0, 0.8);
+      padding: 8px clamp(20px, 4vw, 40px); /* Slightly tighter on scroll */
     }
     
     .logo-container { display: flex; align-items: center; gap: 12px; }
@@ -146,8 +147,11 @@
 
     .nav-links { display: flex; gap: clamp(20px, 3vw, 36px); list-style: none; }
     .nav-links a { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; color: #E4E4E7; text-decoration: none; transition: color 0.25s ease; font-weight: 500; }
-    .nav-links a:hover { color: var(--nothing-white); text-shadow: 0 0 8px rgba(255,255,255,0.3); }
-    .nav-cta { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; background: var(--nothing-white); color: var(--nothing-black); padding: 12px 24px; text-decoration: none; font-weight: 700; border-radius: 20px; transition: all 0.3s ease; border: 1px solid transparent; }
+    
+    /* Dynamic color transition to corporate red on hover */
+    .nav-links a:hover { color: var(--nothing-red); text-shadow: 0 0 8px rgba(255, 0, 0, 0.3); }
+    
+    .nav-cta { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; background: var(--nothing-white); color: var(--nothing-black); padding: 10px 20px; text-decoration: none; font-weight: 700; border-radius: 20px; transition: all 0.3s ease; border: 1px solid transparent; }
     .nav-cta:hover { background: var(--nothing-red); color: var(--nothing-white); border-color: var(--nothing-red); box-shadow: 0 0 15px rgba(255, 0, 0, 0.35); }
     
     .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 101; }
@@ -353,7 +357,7 @@
     .mobile-menu a:hover { color: var(--nothing-red); }
 
     @media (max-width: 960px) {
-      nav { width: calc(100% - 32px); top: 12px; padding: 14px 20px; }
+      nav { width: calc(100% - 32px); top: 12px; padding: 12px 20px; }
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
       
